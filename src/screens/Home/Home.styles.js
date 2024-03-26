@@ -16,4 +16,11 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 20,
   },
+  imgBack: {
+    flex: 1,
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+  },
 });
