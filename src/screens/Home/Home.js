@@ -6,9 +6,18 @@ import {
   View,
   Pressable,
 } from "react-native";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/authSelector";
 import { styles } from "./Home.styles";
 
 export const Home = ({ navigation }) => {
+  const user = useSelector(selectUser);
+  useEffect(() => {
+    if (user.name) {
+      navigation.navigate("Recipes");
+    }
+  }, []);
   return (
     <ImageBackground
       style={styles.imgBack}

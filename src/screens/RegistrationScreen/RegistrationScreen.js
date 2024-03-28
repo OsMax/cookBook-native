@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import { useDispatch } from "react-redux";
 import {
   Text,
   SafeAreaView,
@@ -16,13 +17,16 @@ import { styles } from "./RegistrationScreen.styles";
 import { useState } from "react";
 // import { launchImageLibrary } from "react-native-image-picker";
 import * as ImagePicker from "expo-image-picker";
+import { register } from "../../redux/auth/authOperation";
 
 export const RegistrationScreen = ({ navigation }) => {
-  const [login, setLogin] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hidePass, setHidePass] = useState(true);
   const [avatar, setAvatar] = useState(null);
+
+  const dispatch = useDispatch();
 
   const getAvatar = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -38,7 +42,9 @@ export const RegistrationScreen = ({ navigation }) => {
   };
 
   const submit = () => {
-    console.log(login, email, password, avatar);
+    // console.log(name, email, password, avatar);
+    dispatch(register({ name, email, password, avatar }));
+    navigation.navigate("Recipes");
   };
 
   return (
@@ -75,7 +81,7 @@ export const RegistrationScreen = ({ navigation }) => {
                 <TextInput
                   style={styles.input}
                   placeholder="Логін"
-                  onChangeText={setLogin}
+                  onChangeText={setName}
                   placeholderTextColor="#BDBDBD"
                 />
                 <TextInput

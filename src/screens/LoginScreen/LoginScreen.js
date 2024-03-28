@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import { useDispatch } from "react-redux";
 import {
   Text,
   SafeAreaView,
@@ -13,14 +14,18 @@ import {
 } from "react-native";
 import { styles } from "./LoginScreen.styles";
 import { useState } from "react";
+import { logIn } from "../../redux/auth/authOperation";
 
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hidePass, setHidePass] = useState(true);
 
+  const dispatch = useDispatch();
+
   const submit = () => {
-    console.log(email, password);
+    dispatch(logIn({ email, password }));
+    navigation.navigate("Recipes");
   };
 
   return (
@@ -63,7 +68,7 @@ export const LoginScreen = ({ navigation }) => {
                 </View>
               </KeyboardAvoidingView>
               <Pressable style={styles.singUpBtn} onPress={submit}>
-                <Text style={styles.singUpText}>Зареєстуватися</Text>
+                <Text style={styles.singUpText}>Увійти</Text>
               </Pressable>
               <Pressable onPress={() => navigation.navigate("SingUp")}>
                 <Text style={styles.singInText}>

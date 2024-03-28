@@ -2,14 +2,11 @@ import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
-import { Home } from "./src/screens/Home/Home";
-import { RegistrationScreen } from "./src/screens/RegistrationScreen/RegistrationScreen";
-import { LoginScreen } from "./src/screens/LoginScreen/LoginScreen";
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-
-const Stack = createStackNavigator();
+import { Provider } from "react-redux";
+import { store, persistor } from "./src/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { StartApp } from "./src/components/StartApp";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,28 +18,12 @@ export default function App() {
 
   return (
     <>
-      <>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="SingUp"
-              component={RegistrationScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="SingIn"
-              component={LoginScreen}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-        <StatusBar style="auto" />
-      </>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <StartApp />
+          <StatusBar style="auto" />
+        </PersistGate>
+      </Provider>
     </>
   );
 }
