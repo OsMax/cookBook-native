@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import { useDispatch } from "react-redux";
 import {
   Text,
   SafeAreaView,
@@ -9,9 +10,18 @@ import {
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelector";
 import { styles } from "./RecipesSceen.styles";
+import { logOut } from "../../redux/auth/authOperation";
+import { useEffect } from "react";
 
 export const RecipesScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
+
+  const logOutBtn = () => {
+    dispatch(logOut());
+    navigation.navigate("Home");
+  };
+  useEffect(() => {}, [user]);
   return (
     <ImageBackground
       style={styles.imgBack}
@@ -19,8 +29,16 @@ export const RecipesScreen = ({ navigation }) => {
       resizeMode="cover"
     >
       <View>
-        <Text>{user.name}</Text>
-        <Text>{user.email}</Text>
+        <Text>!!!!!!!!!!!!!!!!!!!!!!</Text>
+        {user && (
+          <View>
+            <Text>{user.name}</Text>
+            <Text>{user.email}</Text>
+          </View>
+        )}
+        <Pressable style={styles.button} onPress={logOutBtn}>
+          <Text>LOGOUT</Text>
+        </Pressable>
         <StatusBar style="auto" />
       </View>
     </ImageBackground>
