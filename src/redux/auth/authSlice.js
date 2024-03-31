@@ -32,10 +32,16 @@ const authSlice = createSlice({
         state.user = { ...payload.user };
         state.token = payload.token;
       })
-      // .addCase(current.fulfilled, (state, { payload }) => {
-      //   console.log(payload);
-      //   // state.user = { ...payload.user };
-      // })
+      .addCase(current.fulfilled, (state, { payload }) => {
+        if (payload.user) {
+          state.user = { ...payload.user };
+        }
+        // state.user = { ...payload.user };
+      })
+      .addCase(current.rejected, (state) => {
+        state.token = null;
+        state.user = { ...initialState.user };
+      })
       .addCase(logIn.fulfilled, (state, { payload }) => {
         state.user = { ...payload.user };
         state.token = payload.token;
