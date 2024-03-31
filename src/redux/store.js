@@ -9,7 +9,8 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+// import storage from "redux-persist/lib/storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { authReducer } from "./auth/authSlice";
 // import { phonesReducer } from './phone/phonesSlice';
@@ -17,7 +18,8 @@ import { authReducer } from "./auth/authSlice";
 
 const persistConfig = {
   key: "root",
-  storage,
+  storage: AsyncStorage,
+  whitelist: ["token"],
 };
 
 const persistRed = persistReducer(persistConfig, authReducer);
