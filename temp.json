@@ -1,0 +1,9 @@
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MGViMDBhMjVmMTUwMjQxYTYwYzkzNyIsImlhdCI6MTcxMjIzODYwMiwiZXhwIjoxNzEyNDk3ODAyfQ.iaEuYEYygKbFfhih6Mmq7puJDySkhz5KNSfPZBC5bjQ",
+    "user": {
+        "avatarURL": "http://res.cloudinary.com/dykzy8ppw/image/upload/v1712238606/cookbook/660eb00a25f150241a60c937.jpg",
+        "email": "Aaa@aaa.aa",
+        "id": "660eb00a25f150241a60c937",
+        "name": "Aaa"
+    }
+}
