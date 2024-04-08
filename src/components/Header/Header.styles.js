@@ -1,0 +1,30 @@
+import { StyleSheet } from "react-native";
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // justifyContent: "center",
+    // marginTop: 50,
+    flexDirection: "row",
+    position: "absolute",
+    top: 0,
+    right: 0,
+    alignItems: "center",
+    borderColor: "#000",
+    borderBottomWidth: 1,
+    borderBottomColor: "#fff",
+    width: "100%",
+    borderRadius: 10,
+    justifyContent: "flex-end",
+  },
+  button: {
+    padding: 10,
+    textAlign: "center",
+    borderRadius: 5,
+    fontSize: 24,
+    fontFamily: "Roboto-Black", // color: "black",
+    // borderWidth: 1,
+    borderColor: "#fff",
+    // marginTop: 20,
+  },
+  btnText: { color: "#fff", fontSize: 24, textDecorationLine: "underline" },
+});
