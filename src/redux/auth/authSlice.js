@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { register, current, logIn, logOut } from "./authOperation";
 
 const initialState = {
-  user: { name: "", email: "", id: "" },
+  user: { name: "", email: "", id: "", avatarURL: "" },
   token: null,
 };
 
@@ -30,6 +30,7 @@ const authSlice = createSlice({
     builder
       .addCase(register.fulfilled, (state, { payload }) => {
         state.user = { ...payload.user };
+        console.log(payload.user);
         state.token = payload.token;
       })
       .addCase(current.fulfilled, (state, { payload }) => {
