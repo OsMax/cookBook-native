@@ -37,11 +37,6 @@ export const StartApp = () => {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="Recipes"
-          component={RecipesScreen}
-          options={{ headerShown: false }}
-        />
       </Stack.Navigator>
     </NavigationContainer>
   );
