@@ -18,6 +18,7 @@ import { useState } from "react";
 // import { launchImageLibrary } from "react-native-image-picker";
 import * as ImagePicker from "expo-image-picker";
 import { register } from "../../redux/auth/authOperation";
+import * as FileSystem from "expo-file-system";
 
 export const RegistrationScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -42,9 +43,8 @@ export const RegistrationScreen = ({ navigation }) => {
   };
 
   const submit = () => {
-    // console.log(name, email, password, avatar);
-    dispatch(register({ name, email, password, avatar }));
-    navigation.navigate("Recipes");
+    // console.log(avatar, name, email, password);
+    dispatch(register({ avatar: avatar, info: { name, email, password } }));
   };
 
   return (
@@ -55,6 +55,23 @@ export const RegistrationScreen = ({ navigation }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView style={styles.screen}>
+          <Pressable
+            style={{
+              width: 25,
+              height: 25,
+              borderWidth: 2,
+              borderColor: "#fff",
+              borderRadius: "50%",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "absolute",
+              top: 10,
+              right: 10,
+            }}
+            onPress={() => navigation.navigate("Home")}
+          >
+            <Text style={{ color: "#fff", fontSize: 14 }}>X</Text>
+          </Pressable>
           <View style={styles.container}>
             <View style={styles.avatarContainer}>
               <View style={styles.avatarImg}>
@@ -111,6 +128,7 @@ export const RegistrationScreen = ({ navigation }) => {
               <Pressable style={styles.singUpBtn} onPress={submit}>
                 <Text style={styles.singUpText}>Зареєстуватися</Text>
               </Pressable>
+
               <Pressable onPress={() => navigation.navigate("SingIn")}>
                 <Text style={styles.singInText}>
                   <Text>Вже є акаунт? </Text>
