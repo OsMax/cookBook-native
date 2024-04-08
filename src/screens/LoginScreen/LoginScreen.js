@@ -25,7 +25,7 @@ export const LoginScreen = ({ navigation }) => {
 
   const submit = () => {
     dispatch(logIn({ email, password }));
-    navigation.navigate("Recipes");
+    // navigation.navigate("Recipes");
   };
 
   return (
@@ -36,6 +36,23 @@ export const LoginScreen = ({ navigation }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView style={styles.screen}>
+          <Pressable
+            style={{
+              width: 25,
+              height: 25,
+              borderWidth: 2,
+              borderColor: "#fff",
+              borderRadius: "50%",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "absolute",
+              top: 10,
+              right: 10,
+            }}
+            onPress={() => navigation.navigate("Home")}
+          >
+            <Text style={{ color: "#fff", fontSize: 14 }}>X</Text>
+          </Pressable>
           <View style={styles.container}>
             <Text style={styles.text}>Увійти</Text>
             <View style={styles.form}>
