@@ -6,6 +6,7 @@ import {
   ImageBackground,
   View,
   Pressable,
+  Image,
 } from "react-native";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelector";
@@ -16,6 +17,7 @@ import { useEffect } from "react";
 export const RecipesScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  console.log(user.avatarURL);
 
   const logOutBtn = () => {
     dispatch(logOut());
@@ -29,7 +31,14 @@ export const RecipesScreen = ({ navigation }) => {
       resizeMode="cover"
     >
       <View>
-        <Text>!!!!!!!!!!!!!!!!!!!!!!</Text>
+        <View style={styles.avatarImg}>
+          {user.avatarURL && (
+            <Image
+              style={{ width: 50, height: 50 }}
+              source={{ uri: user.avatarURL }}
+            />
+          )}
+        </View>
         {user && (
           <View>
             <Text>{user.name}</Text>
