@@ -10,13 +10,16 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelector";
 import { styles } from "./Home.styles";
+import { Header } from "../../components/Header/Header";
+import { Recipes } from "../../components/Recipes/Recipes";
 
 export const Home = ({ navigation }) => {
   const [isLogIn, setIsLogIn] = useState(false);
   const user = useSelector(selectUser);
   useEffect(() => {
     if (user.name) {
-      navigation.navigate("Recipes");
+      // navigation.navigate("Recipes");
+      console.log("11111");
     }
   }, [user]);
   return (
@@ -25,29 +28,12 @@ export const Home = ({ navigation }) => {
       source={require("../../../assets/images/background.webp")}
       resizeMode="cover"
     >
-      <View>
-        <View style={styles.container}>
-          <Pressable
-            style={styles.button}
-            onPress={() => navigation.navigate("SingUp")}
-          >
-            <Text>LogUp</Text>
-          </Pressable>
-          <Pressable
-            style={styles.button}
-            onPress={() => navigation.navigate("SingIn")}
-          >
-            <Text>LogIn</Text>
-          </Pressable>
-          <Pressable
-            style={styles.button}
-            onPress={() => changeScreen("Posts")}
-          >
-            <Text>Posts</Text>
-          </Pressable>
-        </View>
-        <StatusBar style="auto" />
-      </View>
+      {/* <View> */}
+      <Header navigation={navigation} />
+      <Recipes />
+
+      <StatusBar style="auto" />
+      {/* </View> */}
     </ImageBackground>
   );
 };

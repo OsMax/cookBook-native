@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     fontFamily: "Roboto-Black", // color: "black",
     borderWidth: 1,
     marginTop: 20,
+    borderColor: "#fff",
   },
   imgBack: {
     flex: 1,
