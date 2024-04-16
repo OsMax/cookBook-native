@@ -15,7 +15,7 @@ export const Loader = () => {
   return (
     <View style={styles.container}>
       <View style={styles.loaderContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#FF6C00" />
         {/* <Text style={styles.loaderText}>{text}</Text> */}
       </View>
     </View>
