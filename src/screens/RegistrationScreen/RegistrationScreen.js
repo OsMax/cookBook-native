@@ -18,7 +18,9 @@ import { useState } from "react";
 // import { launchImageLibrary } from "react-native-image-picker";
 import * as ImagePicker from "expo-image-picker";
 import { register } from "../../redux/auth/authOperation";
-import * as FileSystem from "expo-file-system";
+import { selectLoader } from "../../redux/auth/authSelector";
+import { Loader } from "../../components/Loader/Loader";
+// import * as FileSystem from "expo-file-system";
 
 export const RegistrationScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -28,6 +30,8 @@ export const RegistrationScreen = ({ navigation }) => {
   const [avatar, setAvatar] = useState(null);
 
   const dispatch = useDispatch();
+
+  const isLoade = useSelector(selectLoader);
 
   const getAvatar = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -48,100 +52,103 @@ export const RegistrationScreen = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground
-      style={styles.imgBack}
-      source={require("../../../assets/images/background.webp")}
-      resizeMode="cover"
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <SafeAreaView style={styles.screen}>
-          <Pressable
-            style={{
-              width: 25,
-              height: 25,
-              borderWidth: 2,
-              borderColor: "#fff",
-              borderRadius: "50%",
-              alignItems: "center",
-              justifyContent: "center",
-              position: "absolute",
-              top: 10,
-              right: 10,
-            }}
-            onPress={() => navigation.navigate("Home")}
-          >
-            <Text style={{ color: "#fff", fontSize: 14 }}>X</Text>
-          </Pressable>
-          <View style={styles.container}>
-            <View style={styles.avatarContainer}>
-              <View style={styles.avatarImg}>
-                {avatar && (
+    <>
+      <ImageBackground
+        style={styles.imgBack}
+        source={require("../../../assets/images/background.webp")}
+        resizeMode="cover"
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <SafeAreaView style={styles.screen}>
+            <Pressable
+              style={{
+                width: 25,
+                height: 25,
+                borderWidth: 2,
+                borderColor: "#fff",
+                borderRadius: "50%",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "absolute",
+                top: 10,
+                right: 10,
+              }}
+              onPress={() => navigation.navigate("Home")}
+            >
+              <Text style={{ color: "#fff", fontSize: 14 }}>X</Text>
+            </Pressable>
+            <View style={styles.container}>
+              <View style={styles.avatarContainer}>
+                <View style={styles.avatarImg}>
+                  {avatar && (
+                    <Image
+                      style={{ width: "100%", height: "100%" }}
+                      source={{ uri: avatar }}
+                    />
+                  )}
+                </View>
+                <Pressable onPress={getAvatar}>
                   <Image
-                    style={{ width: "100%", height: "100%" }}
-                    source={{ uri: avatar }}
+                    style={styles.avatarBtn}
+                    source={require("../../../assets/images/add.png")}
                   />
-                )}
+                </Pressable>
               </View>
-              <Pressable onPress={getAvatar}>
-                <Image
-                  style={styles.avatarBtn}
-                  source={require("../../../assets/images/add.png")}
-                />
-              </Pressable>
-            </View>
-            <Text style={styles.text}>Реєстрація</Text>
-            <View style={styles.form}>
-              <KeyboardAvoidingView
-                style={styles.inputContainer}
-                behavior={Platform.OS == "ios" ? "padding" : "height"}
-              >
-                <TextInput
-                  style={styles.input}
-                  placeholder="Логін"
-                  onChangeText={setName}
-                  placeholderTextColor="#BDBDBD"
-                />
-                <TextInput
-                  inputMode="email"
-                  style={styles.input}
-                  placeholder="Адреса електронної пошти"
-                  onChangeText={setEmail}
-                  placeholderTextColor="#BDBDBD"
-                />
-                <View style={styles.passContainer}>
+              <Text style={styles.text}>Реєстрація</Text>
+              <View style={styles.form}>
+                <KeyboardAvoidingView
+                  style={styles.inputContainer}
+                  behavior={Platform.OS == "ios" ? "padding" : "height"}
+                >
                   <TextInput
-                    secureTextEntry={hidePass}
                     style={styles.input}
-                    placeholder="Пароль"
-                    onChangeText={setPassword}
+                    placeholder="Логін"
+                    onChangeText={setName}
                     placeholderTextColor="#BDBDBD"
                   />
-                  <Pressable
-                    style={styles.passBtn}
-                    onPressIn={() => setHidePass(false)}
-                    onPressOut={() => setHidePass(true)}
-                  >
-                    <Text>Показати</Text>
-                  </Pressable>
-                </View>
-              </KeyboardAvoidingView>
-              <Pressable style={styles.singUpBtn} onPress={submit}>
-                <Text style={styles.singUpText}>Зареєстуватися</Text>
-              </Pressable>
+                  <TextInput
+                    inputMode="email"
+                    style={styles.input}
+                    placeholder="Адреса електронної пошти"
+                    onChangeText={setEmail}
+                    placeholderTextColor="#BDBDBD"
+                  />
+                  <View style={styles.passContainer}>
+                    <TextInput
+                      secureTextEntry={hidePass}
+                      style={styles.input}
+                      placeholder="Пароль"
+                      onChangeText={setPassword}
+                      placeholderTextColor="#BDBDBD"
+                    />
+                    <Pressable
+                      style={styles.passBtn}
+                      onPressIn={() => setHidePass(false)}
+                      onPressOut={() => setHidePass(true)}
+                    >
+                      <Text>Показати</Text>
+                    </Pressable>
+                  </View>
+                </KeyboardAvoidingView>
+                <Pressable style={styles.singUpBtn} onPress={submit}>
+                  <Text style={styles.singUpText}>Зареєстуватися</Text>
+                </Pressable>
 
-              <Pressable onPress={() => navigation.navigate("SingIn")}>
-                <Text style={styles.singInText}>
-                  <Text>Вже є акаунт? </Text>
-                  <Text style={{ textDecorationLine: "underline" }}>
-                    Увійти
+                <Pressable onPress={() => navigation.navigate("SingIn")}>
+                  <Text style={styles.singInText}>
+                    <Text>Вже є акаунт? </Text>
+                    <Text style={{ textDecorationLine: "underline" }}>
+                      Увійти
+                    </Text>
                   </Text>
-                </Text>
-              </Pressable>
+                </Pressable>
+              </View>
             </View>
-          </View>
-          <StatusBar style="auto" />
-        </SafeAreaView>
-      </TouchableWithoutFeedback>
-    </ImageBackground>
+            <StatusBar style="auto" />
+          </SafeAreaView>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
+      {isLoade && <Loader />}
+    </>
   );
 };
