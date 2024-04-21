@@ -9,12 +9,10 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { authReducer } from "./auth/authSlice";
-// import { phonesReducer } from './phone/phonesSlice';
-// import { findReducer } from "./phone/findSlice";
+import { recipeReducer } from "./recipe/recipeSlice";
 
 const persistConfig = {
   key: "root",
@@ -27,8 +25,7 @@ const persistRed = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistRed,
-    // phones: phonesReducer,
-    // filter: findReducer,
+    recipes: recipeReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
