@@ -1,7 +1,7 @@
 import { Home } from "../screens/Home/Home";
 import { RegistrationScreen } from "../screens/RegistrationScreen/RegistrationScreen";
 import { LoginScreen } from "../screens/LoginScreen/LoginScreen";
-import { RecipesScreen } from "../screens/Recipes/RecipesSceen";
+import { RecipeScreen } from "../screens/Recipe/RecipeSceen";
 import { current } from "../redux/auth/authOperation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -35,6 +35,11 @@ export const StartApp = () => {
         <Stack.Screen
           name="SingIn"
           component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddRecipe"
+          component={RecipeScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
