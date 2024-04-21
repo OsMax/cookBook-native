@@ -15,7 +15,7 @@ import {
 } from "../../redux/auth/authSelector";
 import { styles } from "./Home.styles";
 import { Header } from "../../components/Header/Header";
-import { Recipes } from "../../components/Recipes/Recipes";
+import { RecipesList } from "../../components/RecipesList/RecipesList";
 import { Footer } from "../../components/Footer/Footer";
 import { Loader } from "../../components/Loader/Loader";
 
@@ -23,6 +23,8 @@ export const Home = ({ navigation }) => {
   const user = useSelector(selectUser);
   const isLogin = useSelector(selectIsLogIn);
   const isLoade = useSelector(selectLoader);
+
+  const [recipes, setRecipes] = useState(null);
 
   useEffect(() => {
     if (isLogin) {
@@ -37,13 +39,20 @@ export const Home = ({ navigation }) => {
         source={require("../../../assets/images/background.webp")}
         resizeMode="cover"
       >
-        {/* <View> */}
-        <Header navigation={navigation} />
-        <Recipes />
-        {isLogin && <Footer />}
+        <View
+          style={{
+            height: "100%",
+            width: "100%",
+            flex: 1,
+            flexDirection: "column",
+          }}
+        >
+          <Header navigation={navigation} />
+          <RecipesList />
+          {isLogin && <Footer navigation={navigation} />}
 
-        <StatusBar style="auto" />
-        {/* </View> */}
+          {/* <StatusBar style="auto" /> */}
+        </View>
       </ImageBackground>
       {isLoade && <Loader />}
     </>
