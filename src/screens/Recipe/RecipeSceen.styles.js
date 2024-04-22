@@ -3,7 +3,7 @@ export const styles = StyleSheet.create({
   screen: {
     height: "100%",
     width: "100%",
-    marginTop: 60,
+    paddingTop: 40,
   },
   container: {
     position: "relative",
@@ -16,11 +16,12 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     // paddingTop: 92,
     alignItems: "center",
+    paddingBottom: 20,
   },
   avatarContainer: {
     // flex: 1,
     flexDirection: "row",
-    width: "90%",
+    width: "95%",
     // height: 280,
     marginTop: 20,
     // position: "relative",
@@ -54,7 +55,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   inputIng: {
-    width: "90%",
+    width: "95%",
     minHeight: 50,
     paddingVertical: 10,
     paddingHorizontal: 16,
@@ -67,7 +68,7 @@ export const styles = StyleSheet.create({
   },
   inputCook: {
     flexGrow: 1,
-    width: "90%",
+    width: "95%",
     height: 120,
     paddingVertical: 10,
     paddingHorizontal: 16,
@@ -80,7 +81,7 @@ export const styles = StyleSheet.create({
     color: "#000",
   },
   singUpBtn: {
-    width: "90%",
+    width: "95%",
     height: 50,
     backgroundColor: "#FF6C00",
     borderRadius: 100,
