@@ -13,20 +13,25 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
-import { useState } from "react";
+import Checkbox from "expo-checkbox";
+import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelector";
 import { styles } from "./RecipeSceen.styles";
-import { logOut } from "../../redux/auth/authOperation";
-import { useEffect, useRef } from "react";
+import { addRecipe } from "../../redux/recipe/recipeOperation";
 
 export const RecipeScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [ing, setIng] = useState("");
-  const [recipeText, setRecipeText] = useState("");
+  const [cooking, setCooking] = useState("");
   const [image, setImage] = useState(null);
+  const [privStatus, setPriv] = useState(false);
 
   const addIngredient = (item) => {
     setIngredients([...ingredients, ing]);
@@ -53,9 +58,13 @@ export const RecipeScreen = ({ navigation }) => {
   };
 
   const submit = () => {
-    // dispatch(
-    //   register({ avatar: avatar, info: { ingredients, recipeText } })
-    // );
+    // console.log({ img: image, recipeInfo: { name, ingredients, cooking } });
+    dispatch(
+      addRecipe({
+        img: image,
+        recipeInfo: { name, ingredients, cooking, privStatus },
+      })
+    );
   };
   const scrollViewRef = useRef(null);
 
@@ -100,23 +109,37 @@ export const RecipeScreen = ({ navigation }) => {
                   justifyContent: "space-between",
                 }}
               >
-                <View style={styles.avatarContainer}>
-                  <View style={styles.avatarImg}>
-                    {image ? (
-                      <Image
-                        style={{ width: "100%", height: "100%" }}
-                        source={{ uri: image }}
-                      />
-                    ) : (
-                      <Text>Add image</Text>
-                    )}
-                  </View>
-                  <Pressable onPress={getImage}>
-                    <Image
-                      style={styles.avatarBtn}
-                      source={require("../../../assets/images/add.png")}
+                <View style={{ width: "100%", alignItems: "center" }}>
+                  <KeyboardAvoidingView
+                    style={styles.inputContainer}
+                    behavior={Platform.OS == "ios" ? "padding" : "height"}
+                  >
+                    <TextInput
+                      style={styles.inputIng}
+                      placeholder="Назва"
+                      onChangeText={setName}
+                      placeholderTextColor="#BDBDBD"
+                      onSubmitEditing={addIngredient}
                     />
-                  </Pressable>
+                  </KeyboardAvoidingView>
+                  <View style={styles.avatarContainer}>
+                    <View style={styles.avatarImg}>
+                      {image ? (
+                        <Image
+                          style={{ width: "100%", height: "100%" }}
+                          source={{ uri: image }}
+                        />
+                      ) : (
+                        <Text>Add image</Text>
+                      )}
+                    </View>
+                    <Pressable onPress={getImage}>
+                      <Image
+                        style={styles.avatarBtn}
+                        source={require("../../../assets/images/add.png")}
+                      />
+                    </Pressable>
+                  </View>
                 </View>
                 <View
                   style={{
@@ -124,67 +147,67 @@ export const RecipeScreen = ({ navigation }) => {
                     alignItems: "center",
                   }}
                 >
-                  <ScrollView
-                    horizontal
-                    ref={scrollViewRef}
-                    style={{ width: "95%" }}
-                  >
-                    <Pressable
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        // flexWrap: "wrap",
-                        flexDirection: "row",
-                        gap: 4,
-                      }}
-                    >
-                      {ingredients.map((ing) => {
-                        return (
-                          <View
-                            style={{
-                              padding: 10,
-                              backgroundColor: "#FF6C00",
-                              borderRadius: 20,
-                              display: "flex",
-                              flexDirection: "row",
-                              gap: 10,
-                            }}
-                          >
-                            <Text
-                              style={{
-                                color: "#fff",
-                              }}
-                              key={ing}
-                            >
-                              {ing}
-                            </Text>
-                            <Pressable
-                              style={{
-                                width: 20,
-                                height: 20,
-                                borderWidth: 2,
-                                borderColor: "#fff",
-                                borderRadius: 12,
-                                alignItems: "center",
-                                justifyContent: "center",
-                                // position: "absolute",
-                              }}
-                              onPress={() => delIng(ing)}
-                            >
-                              <Text style={{ color: "#fff", fontSize: 10 }}>
-                                X
-                              </Text>
-                            </Pressable>
-                          </View>
-                        );
-                      })}
-                    </Pressable>
-                  </ScrollView>
                   <View style={styles.form}>
                     <KeyboardAvoidingView
                       style={styles.inputContainer}
                       behavior={Platform.OS == "ios" ? "padding" : "height"}
                     >
+                      <ScrollView
+                        horizontal
+                        ref={scrollViewRef}
+                        style={{ width: "95%" }}
+                      >
+                        <Pressable
+                          style={{
+                            width: "100%",
+                            display: "flex",
+                            // flexWrap: "wrap",
+                            flexDirection: "row",
+                            gap: 4,
+                          }}
+                        >
+                          {ingredients.map((ing) => {
+                            return (
+                              <View
+                                style={{
+                                  padding: 10,
+                                  backgroundColor: "#FF6C00",
+                                  borderRadius: 20,
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  gap: 10,
+                                }}
+                                key={ing}
+                              >
+                                <Text
+                                  style={{
+                                    color: "#fff",
+                                  }}
+                                >
+                                  {ing}
+                                </Text>
+                                <Pressable
+                                  style={{
+                                    width: 20,
+                                    height: 20,
+                                    borderWidth: 2,
+                                    borderColor: "#fff",
+                                    borderRadius: 12,
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    // position: "absolute",
+                                  }}
+                                  onPress={() => delIng(ing)}
+                                >
+                                  <Text style={{ color: "#fff", fontSize: 10 }}>
+                                    X
+                                  </Text>
+                                </Pressable>
+                              </View>
+                            );
+                          })}
+                        </Pressable>
+                      </ScrollView>
                       <TextInput
                         style={styles.inputIng}
                         placeholder="Додати інгредієнт"
@@ -199,9 +222,30 @@ export const RecipeScreen = ({ navigation }) => {
                         numberOfLines={6}
                         style={[styles.inputCook]}
                         placeholder="Рецепт приготування"
-                        onChangeText={setRecipeText}
+                        onChangeText={setCooking}
                         placeholderTextColor="#BDBDBD"
                       />
+                      <TouchableOpacity
+                        style={{
+                          marginTop: 10,
+                          width: "100%",
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "center",
+                          gap: 8,
+                        }}
+                        onPress={() => setPriv(!privStatus)}
+                      >
+                        <Checkbox value={privStatus} />
+                        <Text
+                          style={{
+                            textDecorationLine: "underline",
+                            color: "#66f",
+                          }}
+                        >
+                          Тільки для мене
+                        </Text>
+                      </TouchableOpacity>
                     </KeyboardAvoidingView>
                     <Pressable style={styles.singUpBtn} onPress={submit}>
                       <Text style={styles.singUpText}>Зберегти</Text>
