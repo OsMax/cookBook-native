@@ -69,3 +69,39 @@ export const current = createAsyncThunk("auth/current", async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue("Without token");
   }
 });
+
+export const editUser = createAsyncThunk(
+  "auth/editUser",
+  async (data, thunkAPI) => {
+    const state = thunkAPI.getState();
+    // console.log(data);
+    // if (!state.auth.token) return;
+    if (!state.auth.token) return thunkAPI.rejectWithValue("Without token");
+
+    const { avatar, info } = data;
+    try {
+      const formData = new FormData();
+      if (avatar) {
+        formData.append("avatar", {
+          uri: avatar,
+          name: "image.jpg",
+          type: "image/jpeg",
+        });
+      }
+      formData.append("info", JSON.stringify(info));
+
+      const editFetch = await fetch(`${BASEURL}/api/users/edit`, {
+        method: "PATCH",
+        body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${state.auth.token}`,
+        },
+      });
+      const user = await editFetch.json();
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
