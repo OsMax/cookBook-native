@@ -37,7 +37,7 @@ export const Footer = ({ navigation }) => {
             width: 80,
             height: 80,
             position: "relative",
-            top: -40,
+            top: -24,
             margin: "auto",
             borderWidth: 2,
             borderColor: "#FF6C00",
