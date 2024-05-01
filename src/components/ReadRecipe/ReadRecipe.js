@@ -21,8 +21,8 @@ export const ReadRecipe = ({ item, setReadRecipe }) => {
   return (
     <View style={styles.containerModal}>
       <Modal
-        visible={item}
-        animationType="slide"
+        visible={!!item}
+        animationType="fade"
         transparent={true}
         onRequestClose={() => setShowMenu(null)}
       >
