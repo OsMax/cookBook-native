@@ -109,5 +109,7 @@ export const styles = StyleSheet.create({
   inputContainer: {
     width: "100%",
     alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
   },
 });
