@@ -15,6 +15,7 @@ import {
 } from "react-native";
 import { styles } from "./RegistrationScreen.styles";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 // import { launchImageLibrary } from "react-native-image-picker";
 import * as ImagePicker from "expo-image-picker";
 import { register } from "../../redux/auth/authOperation";
@@ -51,6 +52,11 @@ export const RegistrationScreen = ({ navigation }) => {
     dispatch(register({ avatar: avatar, info: { name, email, password } }));
   };
 
+  useEffect(() => {
+    if (isLogin) {
+      navigation.navigate("Home");
+    }
+  }, [isLogin]);
   return (
     <>
       <ImageBackground
@@ -66,7 +72,7 @@ export const RegistrationScreen = ({ navigation }) => {
                 height: 25,
                 borderWidth: 2,
                 borderColor: "#fff",
-                borderRadius: "50%",
+                borderRadius: 12,
                 alignItems: "center",
                 justifyContent: "center",
                 position: "absolute",
@@ -126,7 +132,7 @@ export const RegistrationScreen = ({ navigation }) => {
                       onPressIn={() => setHidePass(false)}
                       onPressOut={() => setHidePass(true)}
                     >
-                      <Text>Показати</Text>
+                      {hidePass ? <Text>Показати</Text> : <Text>Скрити</Text>}
                     </Pressable>
                   </View>
                 </KeyboardAvoidingView>

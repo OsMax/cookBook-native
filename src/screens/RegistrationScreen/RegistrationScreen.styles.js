@@ -97,8 +97,4 @@ export const styles = StyleSheet.create({
     bottom: 0,
     color: "#1B4371",
   },
-  inputContainer: {
-    width: "100%",
-    alignItems: "center",
-  },
 });
