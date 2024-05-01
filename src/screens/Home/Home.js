@@ -18,18 +18,24 @@ import { Header } from "../../components/Header/Header";
 import { RecipesList } from "../../components/RecipesList/RecipesList";
 import { Footer } from "../../components/Footer/Footer";
 import { Loader } from "../../components/Loader/Loader";
+import Toast from "react-native-toast-message";
 
 export const Home = ({ navigation }) => {
   const user = useSelector(selectUser);
   const isLogin = useSelector(selectIsLogIn);
   const isLoade = useSelector(selectLoader);
 
-  const [recipes, setRecipes] = useState(null);
+  // const [recipes, setRecipes] = useState(null);
 
   useEffect(() => {
+    // console.log(user);
     if (isLogin) {
-      // navigation.navigate("Recipes");
-      console.log("11111");
+      Toast.show({
+        type: "success",
+        text1: "You are login",
+        // text2: "You are login",
+        visibilityTime: 1000,
+      });
     }
   }, [user, isLogin]);
   return (
@@ -48,7 +54,7 @@ export const Home = ({ navigation }) => {
           }}
         >
           <Header navigation={navigation} />
-          <RecipesList />
+          <RecipesList navigation={navigation} />
           {isLogin && <Footer navigation={navigation} />}
 
           {/* <StatusBar style="auto" /> */}
