@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
   },
   btnText: {
     color: "#fff",
-    fontSize: 24,
+    fontSize: 20,
     textDecorationLine: "underline",
     color: "#FF6C00",
     textShadowColor: "#000", // Цвет тени
