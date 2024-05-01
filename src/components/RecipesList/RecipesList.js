@@ -34,7 +34,7 @@ export const RecipesList = ({ navigation }) => {
         />
       </View>
       {readRecipe && (
-        <ReadRecipe item={readRecipe} setReadRecipe={setReadRecipe} />
+        <ReadRecipe recipe={readRecipe} setReadRecipe={setReadRecipe} />
       )}
     </View>
   );
