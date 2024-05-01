@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// const BASEURL = "http://192.168.241.123:3000";
-const BASEURL = "https://cookbook-t2ch.onrender.com";
+const BASEURL = "http://192.168.88.11:3000";
+// const BASEURL = "https://cookbook-t2ch.onrender.com";
 
 axios.defaults.baseURL = BASEURL;
 
@@ -13,41 +13,25 @@ const tokenSet = (token) => {
 export const register = createAsyncThunk("auth/register", async (data) => {
   const { avatar, info } = data;
   try {
-    const { data } = await axios.post("/api/users/register", info);
-    // console.log("11111");
-    // console.log(data);
-    tokenSet(`Bearer ${data.token}`);
-
+    const formData = new FormData();
     if (avatar) {
-      const formData = new FormData();
       formData.append("avatar", {
         uri: avatar,
         name: "image.jpg",
         type: "image/jpeg",
       });
-
-      const avaFetch = await fetch(`${BASEURL}/api/users/avatar`, {
-        method: "PATCH",
-        body: formData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${data.token}`,
-        },
-      });
-
-      // const ava = await avaFetch.json();
-      const { avatarURL } = await avaFetch.json();
-      data.user.avatarURL = avatarURL;
-      // console.log(data);
-      // const ava = await fetch("http://192.168.241.123:3000/api/users/test", {
-      //   method: "PATCH",
-      //   headers: { Authorization: `Bearer ${data.token}` },
-      //   // body: formData,
-      // });
-      // console.log(ava);
     }
-    // console.log(r);
-    return data;
+    formData.append("info", JSON.stringify(info));
+
+    const userFetch = await fetch(`${BASEURL}/api/users/register`, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    const user = await userFetch.json();
+    return user;
   } catch (error) {
     console.log(error);
   }
