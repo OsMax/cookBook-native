@@ -1,5 +1,9 @@
 import { View, Pressable, Text, Image } from "react-native";
-import { selectUser, selectIsLogIn } from "../../redux/auth/authSelector";
+import {
+  selectUser,
+  selectIsLogIn,
+  selectUserName,
+} from "../../redux/auth/authSelector";
 import { useSelector } from "react-redux";
 import { styles } from "./Header.styles";
 import { useEffect, useState } from "react";
@@ -8,8 +12,12 @@ import { UserMenu } from "../UserMenu/UserMenu";
 export const Header = ({ navigation }) => {
   const user = useSelector(selectUser);
   const isLogin = useSelector(selectIsLogIn);
+  // const userName = useSelector(selectUserName);
+
   const [showMenu, setShowMenu] = useState(false);
+
   useEffect(() => {
+    // console.log(userName);
     if (!isLogin) {
       setShowMenu(false);
     }
