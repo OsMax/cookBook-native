@@ -49,5 +49,19 @@ export const addRecipe = createAsyncThunk(
   }
 );
 
+export const getPublic = createAsyncThunk(
+  "recipe/getPublic",
+  async ({ page, count }) => {
+    // const state = thunkAPI.getState();
+    console.log(page, count);
+    try {
+      const { data } = await axios.get(
+        `/api/recipes/public?page=${page}&count=${count}`
+      );
+      // console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 });
