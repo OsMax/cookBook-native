@@ -17,7 +17,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useEffect, useState } from "react";
 
 export const ReadRecipe = ({ recipe, setReadRecipe }) => {
-  console.log(recipe);
+  const cooking = recipe.cooking.split("\n");
   return (
     <View style={styles.containerModal}>
       <Modal
@@ -31,7 +31,8 @@ export const ReadRecipe = ({ recipe, setReadRecipe }) => {
             <View style={{ alignItems: "center", width: "100%" }}>
               <Text
                 style={{
-                  fontSize: 24,
+                  fontSize: 28,
+                  maxWidth: "90%",
                   color: "#FF6C00",
                   textShadowColor: "#000", // Цвет тени
                   textShadowOffset: { width: 1, height: 1 }, // Смещение тени
@@ -42,21 +43,56 @@ export const ReadRecipe = ({ recipe, setReadRecipe }) => {
               </Text>
             </View>
             <Image
-              style={{ width: 240, height: 200, borderRadius: 14 }}
+              style={{
+                width: 240,
+                height: 200,
+                borderRadius: 14,
+                marginTop: 12,
+              }}
               source={{ uri: recipe.imageUrl }}
             />
-            <View style={{ width: "100%" }}>
-              <Text>Ingredients:</Text>
-              <View style={{ width: "100%", paddingLeft: 40 }}>
+            <View style={{ width: "100%", marginTop: 12 }}>
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 20,
+                  color: "#FF6C00",
+                  textShadowColor: "#000", // Цвет тени
+                  textShadowOffset: { width: 1, height: 1 }, // Смещение тени
+                  textShadowRadius: 2,
+                  // textDecorationLine: "underline",
+                }}
+              >
+                Ingredients:
+              </Text>
+              <View style={{ width: "100%", paddingLeft: 10, marginTop: 8 }}>
                 {recipe.ingredients.map((ing) => (
-                  <Text>{ing}</Text>
+                  <Text style={{ fontSize: 16 }}>• {ing}</Text>
                 ))}
               </View>
             </View>
-            <View style={{ width: "100%" }}>
-              <Text>Coocking:</Text>
-              <View style={{ width: "100%", paddingLeft: 40 }}>
-                <Text>{recipe.cooking}</Text>
+            <View style={{ width: "100%", marginTop: 12 }}>
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 20,
+                  color: "#FF6C00",
+                  textShadowColor: "#000", // Цвет тени
+                  textShadowOffset: { width: 1, height: 1 }, // Смещение тени
+                  textShadowRadius: 2,
+                  // textDecorationLine: "underline",
+                }}
+              >
+                Coocking:
+              </Text>
+              <View style={{ width: "100%", paddingLeft: 10, marginTop: 8 }}>
+                {/* <Text style={{ fontSize: 16 }}>{recipe.cooking}</Text> */}
+                {cooking.map((line) => (
+                  <Text style={{ fontSize: 16 }}>
+                    {"\t"}
+                    {line}
+                  </Text>
+                ))}
               </View>
             </View>
           </View>
