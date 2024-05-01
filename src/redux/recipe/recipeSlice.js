@@ -12,14 +12,14 @@ const recipeSlise = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addRecipe.pending, (state) => {
-        state.recipes.loader = true;
+        state.loader = true;
       })
       .addCase(addRecipe.fulfilled, (state, { payload }) => {
-        console.log(payload);
-        state.recipes.loader = false;
+        state.loader = false;
       })
       .addCase(addRecipe.rejected, (state) => {
-        state.recipes.loader = false;
+        state.loader = false;
+      })
       });
   },
 });
