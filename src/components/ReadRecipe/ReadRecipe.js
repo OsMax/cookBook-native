@@ -4,11 +4,12 @@ import {
   Text,
   Image,
   Modal,
-  KeyboardAvoidingView,
-  Keyboard,
-  Platform,
+  // KeyboardAvoidingView,
+  // Keyboard,
+  // Platform,
   TouchableWithoutFeedback,
   TextInput,
+  ScrollView,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { styles } from "./ReadRecipe.styles";
@@ -42,59 +43,72 @@ export const ReadRecipe = ({ recipe, setReadRecipe }) => {
                 {recipe.name}
               </Text>
             </View>
-            <Image
+            <ScrollView
+              vertical
               style={{
-                width: 240,
-                height: 200,
-                borderRadius: 14,
-                marginTop: 12,
+                width: "100%",
+                height: "90%",
               }}
-              source={{ uri: recipe.imageUrl }}
-            />
-            <View style={{ width: "100%", marginTop: 12 }}>
-              <Text
+              contentContainerStyle={{
+                alignItems: "center",
+                paddingBottom: 20,
+              }}
+            >
+              <Image
                 style={{
-                  textAlign: "center",
-                  fontSize: 20,
-                  color: "#FF6C00",
-                  textShadowColor: "#000", // Цвет тени
-                  textShadowOffset: { width: 1, height: 1 }, // Смещение тени
-                  textShadowRadius: 2,
-                  // textDecorationLine: "underline",
+                  width: 240,
+                  height: 200,
+                  borderRadius: 14,
+                  marginTop: 12,
                 }}
-              >
-                Ingredients:
-              </Text>
-              <View style={{ width: "100%", paddingLeft: 10, marginTop: 8 }}>
-                {recipe.ingredients.map((ing) => (
-                  <Text style={{ fontSize: 16 }}>• {ing}</Text>
-                ))}
+                source={{ uri: recipe.imageUrl }}
+              />
+              <View style={{ width: "100%", marginTop: 12 }}>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 20,
+                    color: "#FF6C00",
+                    textShadowColor: "#000", // Цвет тени
+                    textShadowOffset: { width: 1, height: 1 }, // Смещение тени
+                    textShadowRadius: 2,
+                    // textDecorationLine: "underline",
+                  }}
+                >
+                  Ingredients:
+                </Text>
+                <View style={{ width: "100%", paddingLeft: 10, marginTop: 8 }}>
+                  {recipe.ingredients.map((ing) => (
+                    <Text key={ing} style={{ fontSize: 16 }}>
+                      • {ing}
+                    </Text>
+                  ))}
+                </View>
               </View>
-            </View>
-            <View style={{ width: "100%", marginTop: 12 }}>
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 20,
-                  color: "#FF6C00",
-                  textShadowColor: "#000", // Цвет тени
-                  textShadowOffset: { width: 1, height: 1 }, // Смещение тени
-                  textShadowRadius: 2,
-                  // textDecorationLine: "underline",
-                }}
-              >
-                Coocking:
-              </Text>
-              <View style={{ width: "100%", paddingLeft: 10, marginTop: 8 }}>
-                {/* <Text style={{ fontSize: 16 }}>{recipe.cooking}</Text> */}
-                {cooking.map((line) => (
-                  <Text style={{ fontSize: 16 }}>
-                    {"\t"}
-                    {line}
-                  </Text>
-                ))}
+              <View style={{ width: "100%", marginTop: 12 }}>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 20,
+                    color: "#FF6C00",
+                    textShadowColor: "#000", // Цвет тени
+                    textShadowOffset: { width: 1, height: 1 }, // Смещение тени
+                    textShadowRadius: 2,
+                    // textDecorationLine: "underline",
+                  }}
+                >
+                  Coocking:
+                </Text>
+                <View style={{ width: "100%", paddingLeft: 10, marginTop: 8 }}>
+                  {cooking.map((line, index) => (
+                    <Text key={`line_${index}`} style={{ fontSize: 16 }}>
+                      {"   "}
+                      {line}
+                    </Text>
+                  ))}
+                </View>
               </View>
-            </View>
+            </ScrollView>
           </View>
           <Pressable
             style={{
@@ -103,7 +117,7 @@ export const ReadRecipe = ({ recipe, setReadRecipe }) => {
               padding: 14,
               borderRadius: 10,
               alignItems: "center",
-              marginTop: 16,
+              // marginTop: 16,
             }}
             onPress={() => setReadRecipe(null)}
           >
