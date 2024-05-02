@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getPublic } from "../../redux/recipe/recipeOperation";
 import { selectRecipes } from "../../redux/recipe/recipeSelector";
+import { selectIsLogIn } from "../../redux/auth/authSelector";
 import { recipesItem } from "../RecipesListItem/RecipesListItem";
 
 export const RecipesList = ({ navigation }) => {
@@ -15,6 +16,7 @@ export const RecipesList = ({ navigation }) => {
   const [readRecipe, setReadRecipe] = useState(null);
 
   const recipes = useSelector(selectRecipes);
+  const isLogIn = useSelector(selectIsLogIn);
 
   const dispatch = useDispatch();
   // dispatch(getPublic({ page, count }));
@@ -27,7 +29,11 @@ export const RecipesList = ({ navigation }) => {
       <View style={styles.recipesList}>
         {/* <Text style={{ color: "#fff" }}>Recipes</Text> */}
         <FlatList
-          style={{ width: "95%", marginBottom: 30 }}
+          style={{
+            width: "95%",
+            paddingBottom: 20,
+            marginBottom: isLogIn ? 30 : 0,
+          }}
           data={recipes}
           renderItem={({ item }) => recipesItem({ item, setReadRecipe })}
           keyExtractor={(item) => item._id}
