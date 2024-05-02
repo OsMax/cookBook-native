@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalContainer: {
-    flex: 1,
+    display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)", // колір фону модального вікна
