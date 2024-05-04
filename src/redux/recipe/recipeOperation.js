@@ -7,6 +7,9 @@ const BASEURL = "http://192.168.88.16:3000"; //home
 // const BASEURL = "https://cookbook-t2ch.onrender.com";
 
 axios.defaults.baseURL = BASEURL;
+const tokenSet = (token) => {
+  axios.defaults.headers.common.authorization = token;
+};
 
 export const addRecipe = createAsyncThunk(
   "recipe/add",
@@ -46,7 +49,26 @@ export const getPublic = createAsyncThunk(
   "recipe/getPublic",
   async ({ page, count }) => {
     // const state = thunkAPI.getState();
-    console.log(page, count);
+    // console.log(page, count);
+    try {
+      const { data } = await axios.get(
+        `/api/recipes/public?page=${page}&count=${count}`
+      );
+      // console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const getMy = createAsyncThunk(
+  "recipe/getPublic",
+  async ({ page, count }) => {
+    const state = thunkAPI.getState();
+    if (!state.auth.token) return thunkAPI.rejectWithValue("Without token");
+    tokenSet(`Bearer ${state.auth.token}`);
+
     try {
       const { data } = await axios.get(
         `/api/recipes/public?page=${page}&count=${count}`
