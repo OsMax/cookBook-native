@@ -25,7 +25,11 @@ const recipeSlise = createSlice({
         state.loader = true;
       })
       .addCase(getPublic.fulfilled, (state, { payload }) => {
-        state.recipes = [...state.recipes, ...payload];
+        const { data, page } = payload;
+
+        if (page === 1) state.recipes = [...data];
+        else state.recipes = [...state.recipes, ...data];
+
         state.loader = false;
       });
   },
