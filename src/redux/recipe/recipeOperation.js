@@ -55,7 +55,7 @@ export const getPublic = createAsyncThunk(
         `/api/recipes/public?page=${page}&count=${count}`
       );
       // console.log(data);
-      return data;
+      return { data, page };
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +74,7 @@ export const getMy = createAsyncThunk(
         `/api/recipes/public?page=${page}&count=${count}`
       );
       // console.log(data);
-      return data;
+      return { data, page };
     } catch (error) {
       console.log(error);
     }
