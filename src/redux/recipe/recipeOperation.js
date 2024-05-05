@@ -63,15 +63,15 @@ export const getPublic = createAsyncThunk(
 );
 
 export const getMy = createAsyncThunk(
-  "recipe/getPublic",
-  async ({ page, count }) => {
+  "recipe/getMy",
+  async ({ page, count }, thunkAPI) => {
     const state = thunkAPI.getState();
     if (!state.auth.token) return thunkAPI.rejectWithValue("Without token");
     tokenSet(`Bearer ${state.auth.token}`);
 
     try {
       const { data } = await axios.get(
-        `/api/recipes/public?page=${page}&count=${count}`
+        `/api/recipes/my?page=${page}&count=${count}`
       );
       // console.log(data);
       return { data, page };
