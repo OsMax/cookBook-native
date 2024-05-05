@@ -1,7 +1,21 @@
 import { View, Text, Pressable } from "react-native";
+import { useDispatch } from "react-redux";
+import { getPublic, getMy } from "../../redux/recipe/recipeOperation";
 import { styles } from "./Footer.styles";
 
-export const Footer = ({ navigation }) => {
+export const Footer = ({ navigation, setPage, count, setEditShow }) => {
+  const dispatch = useDispatch();
+
+  const toAll = () => {
+    setEditShow(false);
+    dispatch(getPublic({ page: 1, count }));
+  };
+
+  const toMy = () => {
+    setEditShow(true);
+    dispatch(getMy({ page: 1, count }));
+  };
+
   return (
     <View style={styles.container}>
       {/* <Text style={styles.text}>FOOTER</Text> */}
@@ -16,9 +30,7 @@ export const Footer = ({ navigation }) => {
         }}
       >
         <Pressable
-          onPress={() => {
-            console.log("all");
-          }}
+          onPress={toAll}
           style={{
             minWidth: 120,
             alignItems: "center",
@@ -59,9 +71,7 @@ export const Footer = ({ navigation }) => {
           </Text>
         </Pressable>
         <Pressable
-          onPress={() => {
-            console.log("my");
-          }}
+          onPress={toMy}
           style={{
             minWidth: 120,
             alignItems: "center",
