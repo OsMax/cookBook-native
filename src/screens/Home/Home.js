@@ -21,6 +21,10 @@ import { Loader } from "../../components/Loader/Loader";
 import Toast from "react-native-toast-message";
 
 export const Home = ({ navigation }) => {
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(10);
+  const [editShow, setEditShow] = useState(false);
+
   const user = useSelector(selectUser);
   const isLogin = useSelector(selectIsLogIn);
   const isLoade = useSelector(selectLoader);
@@ -54,8 +58,21 @@ export const Home = ({ navigation }) => {
           }}
         >
           <Header navigation={navigation} />
-          <RecipesList navigation={navigation} />
-          {isLogin && <Footer navigation={navigation} />}
+          <RecipesList
+            navigation={navigation}
+            page={page}
+            setPage={setPage}
+            count={count}
+            editShow={editShow}
+          />
+          {isLogin && (
+            <Footer
+              navigation={navigation}
+              setPage={setPage}
+              count={count}
+              setEditShow={setEditShow}
+            />
+          )}
 
           {/* <StatusBar style="auto" /> */}
         </View>
