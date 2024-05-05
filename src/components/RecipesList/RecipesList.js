@@ -10,9 +10,9 @@ import { selectRecipes } from "../../redux/recipe/recipeSelector";
 import { selectIsLogIn } from "../../redux/auth/authSelector";
 import { recipesItem } from "../RecipesListItem/RecipesListItem";
 
-export const RecipesList = ({ navigation }) => {
-  const [page, setPage] = useState(1);
-  const [count, setCount] = useState(10);
+export const RecipesList = ({ navigation, page, setPage, count, editShow }) => {
+  // const [page, setPage] = useState(1);
+  // const [count, setCount] = useState(10);
   const [readRecipe, setReadRecipe] = useState(null);
 
   const recipes = useSelector(selectRecipes);
@@ -22,7 +22,7 @@ export const RecipesList = ({ navigation }) => {
   // dispatch(getPublic({ page, count }));
 
   useEffect(() => {
-    dispatch(getPublic({ page, count }));
+    if (recipes.length === 0) dispatch(getPublic({ page, count }));
   }, [page]);
   return (
     <View style={styles.container}>
