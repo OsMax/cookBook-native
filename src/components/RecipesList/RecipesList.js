@@ -1,4 +1,4 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, Pressable, Text } from "react-native";
 import { styles } from "./RecipesList.styles";
 import { ReadRecipe } from "../ReadRecipe/ReadRecipe";
 import { useEffect, useState } from "react";
@@ -14,6 +14,7 @@ export const RecipesList = ({ navigation, page, setPage, count, editShow }) => {
   // const [page, setPage] = useState(1);
   // const [count, setCount] = useState(10);
   const [readRecipe, setReadRecipe] = useState(null);
+  const [showMore, setShowMore] = useState(true);
 
   const recipes = useSelector(selectRecipes);
   const isLogIn = useSelector(selectIsLogIn);
@@ -22,7 +23,10 @@ export const RecipesList = ({ navigation, page, setPage, count, editShow }) => {
   // dispatch(getPublic({ page, count }));
 
   useEffect(() => {
-    if (recipes.length === 0) dispatch(getPublic({ page, count }));
+    if (recipes.length % count) setShowMore(false);
+    else setShowMore(true);
+
+    dispatch(getPublic({ page, count }));
   }, [page]);
   return (
     <View style={styles.container}>
@@ -38,11 +42,20 @@ export const RecipesList = ({ navigation, page, setPage, count, editShow }) => {
           renderItem={({ item }) => recipesItem({ item, setReadRecipe })}
           keyExtractor={(item) => item._id}
         />
+        {showMore && (
+          <Pressable
+            onPress={() => {
+              setPage(page + 1);
+              console.log(page);
+            }}
+          >
             <View>
               <Text style={{ padding: 10, fontSize: 16, color: "#fff" }}>
                 Show more
               </Text>
             </View>
+          </Pressable>
+        )}
       </View>
       {readRecipe && (
         <ReadRecipe recipe={readRecipe} setReadRecipe={setReadRecipe} />
