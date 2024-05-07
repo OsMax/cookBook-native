@@ -11,22 +11,16 @@ import { selectIsLogIn } from "../../redux/auth/authSelector";
 import { recipesItem } from "../RecipesListItem/RecipesListItem";
 
 export const RecipesList = ({ navigation, page, setPage, count, editShow }) => {
-  // const [page, setPage] = useState(1);
-  // const [count, setCount] = useState(10);
   const [readRecipe, setReadRecipe] = useState(null);
-  const [showMore, setShowMore] = useState(true);
+  // const [showMore, setShowMore] = useState(true);
 
   const recipes = useSelector(selectRecipes);
   const isLogIn = useSelector(selectIsLogIn);
 
   const dispatch = useDispatch();
-  // dispatch(getPublic({ page, count }));
 
   useEffect(() => {
-    if (recipes.length % count) setShowMore(false);
-    else setShowMore(true);
-
-    dispatch(getPublic({ page, count }));
+    if (!(recipes.length % count)) dispatch(getPublic({ page, count }));
   }, [page]);
   return (
     <View style={styles.container}>
@@ -41,8 +35,11 @@ export const RecipesList = ({ navigation, page, setPage, count, editShow }) => {
           data={recipes}
           renderItem={({ item }) => recipesItem({ item, setReadRecipe })}
           keyExtractor={(item) => item._id}
+          onEndReached={() => {
+            if (!(recipes.length % count)) setPage(page + 1);
+          }}
         />
-        {showMore && (
+        {/* {showMore && (
           <Pressable
             onPress={() => {
               setPage(page + 1);
@@ -55,7 +52,7 @@ export const RecipesList = ({ navigation, page, setPage, count, editShow }) => {
               </Text>
             </View>
           </Pressable>
-        )}
+        )} */}
       </View>
       {readRecipe && (
         <ReadRecipe recipe={readRecipe} setReadRecipe={setReadRecipe} />
