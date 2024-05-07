@@ -38,6 +38,11 @@ export const RecipesList = ({ navigation, page, setPage, count, editShow }) => {
           renderItem={({ item }) => recipesItem({ item, setReadRecipe })}
           keyExtractor={(item) => item._id}
         />
+            <View>
+              <Text style={{ padding: 10, fontSize: 16, color: "#fff" }}>
+                Show more
+              </Text>
+            </View>
       </View>
       {readRecipe && (
         <ReadRecipe recipe={readRecipe} setReadRecipe={setReadRecipe} />
