@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { getPublic, getMy } from "../../redux/recipe/recipeOperation";
 import { styles } from "./Footer.styles";
 
-export const Footer = ({ navigation, setPage, count, setEditShow }) => {
+export const Footer = ({ navigation, count, setEditShow }) => {
   const dispatch = useDispatch();
 
   const toAll = () => {
