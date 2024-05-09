@@ -18,8 +18,6 @@ import {
 import Checkbox from "expo-checkbox";
 import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/auth/authSelector";
 import { styles } from "./RecipeSceen.styles";
 import { addRecipe } from "../../redux/recipe/recipeOperation";
 
@@ -33,7 +31,7 @@ export const RecipeScreen = ({ navigation }) => {
   const [image, setImage] = useState(null);
   const [privStatus, setPriv] = useState(false);
 
-  const addIngredient = (item) => {
+  const addIngredient = () => {
     setIngredients([...ingredients, ing]);
     setIng("");
   };
@@ -51,8 +49,6 @@ export const RecipeScreen = ({ navigation }) => {
   };
 
   const delIng = (ingName) => {
-    // console.log(ingName);
-    // setIngredients(...ingredients.filter((item) => item !== ingName));
     const newIngredients = ingredients.filter((item) => item !== ingName);
     setIngredients([...newIngredients]);
   };
@@ -119,7 +115,6 @@ export const RecipeScreen = ({ navigation }) => {
                       placeholder="Назва"
                       onChangeText={setName}
                       placeholderTextColor="#BDBDBD"
-                      onSubmitEditing={addIngredient}
                     />
                   </KeyboardAvoidingView>
                   <View style={styles.avatarContainer}>
