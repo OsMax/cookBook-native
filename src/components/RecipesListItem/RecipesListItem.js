@@ -1,8 +1,8 @@
 import { Text, View, Image, Dimensions, Pressable } from "react-native";
 
-export const recipesItem = ({ item, editShow, setReadRecipe }) => {
+export const recipesItem = ({ navigation, item, editShow, setReadRecipe }) => {
   const date = item.date.split("T")[0];
-  console.log(editShow);
+  // console.log(editShow);
   const widthIteminfo = Dimensions.get("window").width * 0.95 - 158;
 
   return (
@@ -98,7 +98,7 @@ export const recipesItem = ({ item, editShow, setReadRecipe }) => {
       {editShow && (
         <Pressable
           style={{ position: "absolute", top: 20, right: 10 }}
-          onPress={() => console.log("press")}
+          onPress={() => navigation.navigate("AddRecipe", { recipe: item })}
         >
           <Image
             style={{
