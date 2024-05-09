@@ -20,9 +20,12 @@ import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { styles } from "./RecipeSceen.styles";
 import { addRecipe } from "../../redux/recipe/recipeOperation";
+import { useRoute } from "@react-navigation/native";
 
 export const RecipeScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+  const route = useRoute();
+  const recipe = route.params?.recipe;
 
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
@@ -65,6 +68,13 @@ export const RecipeScreen = ({ navigation }) => {
   const scrollViewRef = useRef(null);
 
   useEffect(() => {
+    if (recipe) {
+      setName(recipe.name);
+      setIngredients(recipe.ingredients);
+      setCooking(recipe.cooking);
+      setImage(recipe.imageUrl);
+      setPriv(recipe.privStatus);
+    }
     scrollViewRef.current.scrollToEnd({ animated: true });
   }, [ingredients]);
 
@@ -114,6 +124,7 @@ export const RecipeScreen = ({ navigation }) => {
                       style={styles.inputIng}
                       placeholder="Назва"
                       onChangeText={setName}
+                      value={name}
                       placeholderTextColor="#BDBDBD"
                     />
                   </KeyboardAvoidingView>
@@ -217,6 +228,7 @@ export const RecipeScreen = ({ navigation }) => {
                         numberOfLines={6}
                         style={[styles.inputCook]}
                         placeholder="Рецепт приготування"
+                        value={cooking}
                         onChangeText={setCooking}
                         placeholderTextColor="#BDBDBD"
                       />
