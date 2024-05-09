@@ -1,10 +1,13 @@
 import { View, Text, Pressable } from "react-native";
 import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 import { getPublic, getMy } from "../../redux/recipe/recipeOperation";
 import { styles } from "./Footer.styles";
 
-export const Footer = ({ navigation, count, setEditShow }) => {
+export const Footer = ({ count, setEditShow }) => {
   const dispatch = useDispatch();
+
+  const navigation = useNavigation();
 
   const toAll = () => {
     setEditShow(false);
