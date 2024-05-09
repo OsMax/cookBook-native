@@ -45,6 +45,39 @@ export const addRecipe = createAsyncThunk(
   }
 );
 
+export const editRecipe = createAsyncThunk(
+  "recipe/edit",
+  async (data, thunkAPI) => {
+    const { img, recipeInfo } = data;
+    recipeInfo.date = new Date();
+    try {
+      const formData = new FormData();
+      if (img) {
+        formData.append("image", {
+          uri: img,
+          name: "image.jpg",
+          type: "image/jpeg",
+        });
+      }
+
+      formData.append("recipeInfo", JSON.stringify(recipeInfo));
+
+      const recipeFetch = await fetch(`${BASEURL}/api/recipes/`, {
+        method: "PATCH",
+        body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${state.auth.token}`,
+        },
+      });
+
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const getPublic = createAsyncThunk(
   "recipe/getPublic",
   async ({ page, count }) => {
