@@ -10,11 +10,8 @@ import { selectRecipes } from "../../redux/recipe/recipeSelector";
 import { selectIsLogIn } from "../../redux/auth/authSelector";
 import { recipesItem } from "../RecipesListItem/RecipesListItem";
 
-export const RecipesList = ({ navigation, page, setPage, count, editShow }) => {
 export const RecipesList = ({ page, setPage, count, editShow }) => {
   const [readRecipe, setReadRecipe] = useState(null);
-  // const [showMore, setShowMore] = useState(true);
-
   const recipes = useSelector(selectRecipes);
   const isLogIn = useSelector(selectIsLogIn);
 
@@ -34,7 +31,6 @@ export const RecipesList = ({ page, setPage, count, editShow }) => {
             marginBottom: isLogIn ? 30 : 0,
           }}
           data={recipes}
-          renderItem={({ item }) => recipesItem({ item, setReadRecipe })}
           renderItem={({ item }) =>
             recipesItem({ item, editShow, setReadRecipe })
           }
