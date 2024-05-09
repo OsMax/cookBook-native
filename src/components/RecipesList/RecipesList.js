@@ -2,6 +2,7 @@ import { View, FlatList, Pressable, Text } from "react-native";
 import { styles } from "./RecipesList.styles";
 import { ReadRecipe } from "../ReadRecipe/ReadRecipe";
 import { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -11,11 +12,12 @@ import { selectIsLogIn } from "../../redux/auth/authSelector";
 import { recipesItem } from "../RecipesListItem/RecipesListItem";
 
 export const RecipesList = ({ page, setPage, count, editShow }) => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   const [readRecipe, setReadRecipe] = useState(null);
   const recipes = useSelector(selectRecipes);
   const isLogIn = useSelector(selectIsLogIn);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!(recipes.length % count)) dispatch(getPublic({ page, count }));
@@ -32,7 +34,7 @@ export const RecipesList = ({ page, setPage, count, editShow }) => {
           }}
           data={recipes}
           renderItem={({ item }) =>
-            recipesItem({ item, editShow, setReadRecipe })
+            recipesItem({ navigation, item, editShow, setReadRecipe })
           }
           keyExtractor={(item) => item._id}
           onEndReached={() => {
