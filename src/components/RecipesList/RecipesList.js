@@ -35,6 +35,9 @@ export const RecipesList = ({ page, setPage, count, editShow }) => {
           }}
           data={recipes}
           renderItem={({ item }) => recipesItem({ item, setReadRecipe })}
+          renderItem={({ item }) =>
+            recipesItem({ item, editShow, setReadRecipe })
+          }
           keyExtractor={(item) => item._id}
           onEndReached={() => {
             if (!(recipes.length % count)) setPage(page + 1);
