@@ -19,7 +19,7 @@ import Checkbox from "expo-checkbox";
 import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { styles } from "./RecipeSceen.styles";
-import { addRecipe } from "../../redux/recipe/recipeOperation";
+import { addRecipe, editRecipe } from "../../redux/recipe/recipeOperation";
 import { useRoute } from "@react-navigation/native";
 
 export const RecipeScreen = ({ navigation }) => {
@@ -58,12 +58,21 @@ export const RecipeScreen = ({ navigation }) => {
 
   const submit = () => {
     // console.log({ img: image, recipeInfo: { name, ingredients, cooking } });
-    dispatch(
-      addRecipe({
-        img: image,
-        recipeInfo: { name, ingredients, cooking, privStatus },
-      })
-    );
+    if (recipe) {
+      dispatch(
+        addRecipe({
+          img: image,
+          recipeInfo: { id: recipe.id, name, ingredients, cooking, privStatus },
+        })
+      );
+    } else {
+      dispatch(
+        addRecipe({
+          img: image,
+          recipeInfo: { name, ingredients, cooking, privStatus },
+        })
+      );
+    }
   };
   const scrollViewRef = useRef(null);
 
