@@ -11,6 +11,7 @@ import { selectIsLogIn } from "../../redux/auth/authSelector";
 import { recipesItem } from "../RecipesListItem/RecipesListItem";
 
 export const RecipesList = ({ navigation, page, setPage, count, editShow }) => {
+export const RecipesList = ({ page, setPage, count, editShow }) => {
   const [readRecipe, setReadRecipe] = useState(null);
   // const [showMore, setShowMore] = useState(true);
 
