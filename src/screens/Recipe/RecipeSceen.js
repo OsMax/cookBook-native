@@ -33,6 +33,7 @@ export const RecipeScreen = ({ navigation }) => {
   const [cooking, setCooking] = useState("");
   const [image, setImage] = useState(null);
   const [privStatus, setPriv] = useState(false);
+  const [save, setSave] = useState(true);
 
   const addIngredient = () => {
     setIngredients([...ingredients, ing]);
@@ -74,6 +75,7 @@ export const RecipeScreen = ({ navigation }) => {
       );
     }
   };
+
   const scrollViewRef = useRef(null);
 
   useEffect(() => {
@@ -83,9 +85,27 @@ export const RecipeScreen = ({ navigation }) => {
       setCooking(recipe.cooking);
       setImage(recipe.imageUrl);
       setPriv(recipe.privStatus);
+      setSave(false);
+    } else {
+      setSave(true);
     }
+  }, []);
+
+  useEffect(() => {
     scrollViewRef.current.scrollToEnd({ animated: true });
-  }, [ingredients]);
+
+    if (recipe) {
+      if (
+        recipe.name !== name ||
+        recipe.cooking !== cooking ||
+        recipe.privStatus !== privStatus
+      ) {
+        setSave(true);
+      } else {
+        setSave(false);
+      }
+    }
+  }, [ingredients, name, cooking, privStatus]);
 
   return (
     <>
@@ -263,9 +283,11 @@ export const RecipeScreen = ({ navigation }) => {
                         </Text>
                       </TouchableOpacity>
                     </KeyboardAvoidingView>
-                    <Pressable style={styles.singUpBtn} onPress={submit}>
-                      <Text style={styles.singUpText}>Зберегти</Text>
-                    </Pressable>
+                    {save && (
+                      <Pressable style={styles.singUpBtn} onPress={submit}>
+                        <Text style={styles.singUpText}>Зберегти</Text>
+                      </Pressable>
+                    )}
                   </View>
                 </View>
               </View>
