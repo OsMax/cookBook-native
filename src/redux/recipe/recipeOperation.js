@@ -62,14 +62,17 @@ export const editRecipe = createAsyncThunk(
 
       formData.append("recipeInfo", JSON.stringify(recipeInfo));
 
-      const recipeFetch = await fetch(`${BASEURL}/api/recipes/`, {
-        method: "PATCH",
-        body: formData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${state.auth.token}`,
-        },
-      });
+      const recipeFetch = await fetch(
+        `${BASEURL}/api/recipes/${recipeInfo.id}`,
+        {
+          method: "PATCH",
+          body: formData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${state.auth.token}`,
+          },
+        }
+      );
 
       return data;
     } catch (error) {
