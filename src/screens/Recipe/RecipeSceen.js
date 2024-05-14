@@ -98,7 +98,10 @@ export const RecipeScreen = ({ navigation }) => {
       if (
         recipe.name !== name ||
         recipe.cooking !== cooking ||
-        recipe.privStatus !== privStatus
+        recipe.privStatus !== privStatus ||
+        image !== recipe.imageUrl ||
+        ingredients.slice().sort().toString() !==
+          recipe.ingredients.slice().sort().toString()
       ) {
         setSave(true);
       } else {
