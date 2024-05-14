@@ -60,12 +60,18 @@ export const RecipeScreen = ({ navigation }) => {
   const submit = () => {
     // console.log({ img: image, recipeInfo: { name, ingredients, cooking } });
     if (recipe) {
-      dispatch(
-        addRecipe({
-          img: image,
-          recipeInfo: { id: recipe.id, name, ingredients, cooking, privStatus },
-        })
-      );
+      const forEdit = { id: recipe._id, recipeInfo: {} };
+      if (image !== recipe.image) forEdit.img = image;
+      if (recipe.cooking !== cooking) forEdit.recipeInfo.cooking = cooking;
+      if (recipe.privStatus !== privStatus)
+        forEdit.recipeInfo.privStatus = privStatus;
+      if (recipe.name !== name) forEdit.recipeInfo.name = name;
+      if (
+        recipe.ingredients.slice().sort().toString() !==
+        ingredients.slice().sort().toString()
+      )
+        forEdit.recipeInfo.ingredients = ingredients;
+      dispatch(editRecipe(forEdit));
     } else {
       dispatch(
         addRecipe({
