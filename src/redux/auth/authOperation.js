@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const BASEURL = "http://192.168.88.11:3000";
+const BASEURL = "http://192.168.226.123:3000";
 // const BASEURL = "https://cookbook-t2ch.onrender.com";
 
 axios.defaults.baseURL = BASEURL;
