@@ -61,7 +61,7 @@ export const RecipeScreen = ({ navigation }) => {
     // console.log({ img: image, recipeInfo: { name, ingredients, cooking } });
     if (recipe) {
       const forEdit = { id: recipe._id, recipeInfo: {} };
-      if (image !== recipe.image) forEdit.img = image;
+      if (image !== recipe.imageUrl) forEdit.img = image;
       if (recipe.cooking !== cooking) forEdit.recipeInfo.cooking = cooking;
       if (recipe.privStatus !== privStatus)
         forEdit.recipeInfo.privStatus = privStatus;
@@ -114,7 +114,7 @@ export const RecipeScreen = ({ navigation }) => {
         setSave(false);
       }
     }
-  }, [ingredients, name, cooking, privStatus]);
+  }, [ingredients, name, cooking, privStatus, image]);
 
   return (
     <>
