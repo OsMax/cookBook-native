@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // const BASEURL = "http://192.168.88.16:3000"; //home
 
-const BASEURL = "http://192.168.45.123:3000"; //work
+const BASEURL = "http://192.168.226.123:3000"; //work
 // const BASEURL = "https://cookbook-t2ch.onrender.com";
 
 axios.defaults.baseURL = BASEURL;
@@ -48,8 +48,8 @@ export const addRecipe = createAsyncThunk(
 export const editRecipe = createAsyncThunk(
   "recipe/edit",
   async (data, thunkAPI) => {
-    const { img, recipeInfo } = data;
-    recipeInfo.date = new Date();
+    const state = thunkAPI.getState();
+    const { img, id, recipeInfo } = data;
     try {
       const formData = new FormData();
       if (img) {
@@ -59,22 +59,20 @@ export const editRecipe = createAsyncThunk(
           type: "image/jpeg",
         });
       }
+      console.log(recipeInfo);
 
       formData.append("recipeInfo", JSON.stringify(recipeInfo));
 
-      const recipeFetch = await fetch(
-        `${BASEURL}/api/recipes/${recipeInfo.id}`,
-        {
-          method: "PATCH",
-          body: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${state.auth.token}`,
-          },
-        }
-      );
+      const recipeFetch = await fetch(`${BASEURL}/api/recipes/${id}`, {
+        method: "PATCH",
+        body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${state.auth.token}`,
+        },
+      });
 
-      return data;
+      // return data;
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +88,6 @@ export const getPublic = createAsyncThunk(
       const { data } = await axios.get(
         `/api/recipes/public?page=${page}&count=${count}`
       );
-      // console.log(data);
       return { data, page };
     } catch (error) {
       console.log(error);
