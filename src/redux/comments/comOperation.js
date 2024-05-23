@@ -31,6 +31,17 @@ export const addComment = createAsyncThunk(
   }
 );
 
+export const editComment = createAsyncThunk(
+  "comment/edit",
+  async (data, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const { id, text } = data;
+    if (!state.auth.token) return thunkAPI.rejectWithValue("Without token");
+    tokenSet(`Bearer ${state.auth.token}`);
+    const comment = { text };
+
+    try {
+      const result = await axios.patch(`/api/comments/${id}`, comment);
       //   return result;
       console.log(result);
     } catch (error) {
