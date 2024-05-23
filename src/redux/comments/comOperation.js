@@ -22,7 +22,15 @@ export const addComment = createAsyncThunk(
     comment.date = new Date();
 
     try {
-      const result = await axios.post(`/api/comments/${id}`);
+      const result = await axios.post(`/api/comments/${id}`, comment);
+      //   return result;
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
       //   return result;
       console.log(result);
     } catch (error) {
