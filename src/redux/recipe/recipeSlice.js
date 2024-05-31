@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addRecipe, getPublic, getMy } from "./recipeOperation";
+import { addRecipe, getPublic, getMy, editRecipe } from "./recipeOperation";
 
 const initialState = {
   recipes: [],
@@ -18,6 +18,16 @@ const recipeSlise = createSlice({
         state.loader = false;
       })
       .addCase(addRecipe.rejected, (state) => {
+        state.loader = false;
+      })
+      .addCase(editRecipe.pending, (state) => {
+        state.loader = true;
+      })
+      .addCase(editRecipe.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.loader = false;
+      })
+      .addCase(editRecipe.rejected, (state) => {
         state.loader = false;
       })
       .addCase(getPublic.rejected, (state) => {

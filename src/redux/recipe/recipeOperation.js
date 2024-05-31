@@ -71,7 +71,7 @@ export const editRecipe = createAsyncThunk(
         },
       });
 
-      // return data;
+      return recipeFetch;
     } catch (error) {
       console.log(error);
     }
