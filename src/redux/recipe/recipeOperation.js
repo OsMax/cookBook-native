@@ -58,7 +58,7 @@ export const editRecipe = createAsyncThunk(
           type: "image/jpeg",
         });
       }
-      console.log(recipeInfo);
+      // console.log(recipeInfo);
 
       formData.append("recipeInfo", JSON.stringify(recipeInfo));
 
@@ -71,7 +71,7 @@ export const editRecipe = createAsyncThunk(
         },
       });
 
-      return recipeFetch;
+      return await recipeFetch.json();
     } catch (error) {
       console.log(error);
     }
