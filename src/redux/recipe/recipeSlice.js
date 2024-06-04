@@ -24,7 +24,9 @@ const recipeSlise = createSlice({
         state.loader = true;
       })
       .addCase(editRecipe.fulfilled, (state, { payload }) => {
-        console.log(payload);
+        state.recipes = state.recipes.map((recipe) =>
+          recipe._id === payload._id ? { ...recipe, ...payload } : recipe
+        );
         state.loader = false;
       })
       .addCase(editRecipe.rejected, (state) => {
