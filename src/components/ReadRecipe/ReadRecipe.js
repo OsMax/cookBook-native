@@ -18,6 +18,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useEffect, useState } from "react";
 
 export const ReadRecipe = ({ recipe, setReadRecipe }) => {
+  const [showComments, setShowComments] = useState(false);
   const cooking = recipe.cooking.split("\n");
   return (
     <View style={styles.containerModal}>
@@ -108,6 +109,31 @@ export const ReadRecipe = ({ recipe, setReadRecipe }) => {
                   ))}
                 </View>
               </View>
+              <Pressable
+                style={{
+                  width: "100%",
+                  marginTop: 12,
+                  borderRadius: 10,
+                  alignItems: "center",
+                }}
+                // onPress={() => setReadRecipe(null)}
+              >
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 20,
+                    padding: 14,
+                    color: "#FF6C00",
+                    textShadowColor: "#000", // Цвет тени
+                    textShadowOffset: { width: 1, height: 1 }, // Смещение тени
+                    textShadowRadius: 2,
+                    textDecorationLine: "underline",
+                    // textDecorationLine: "underline",
+                  }}
+                >
+                  Show comments →
+                </Text>
+              </Pressable>
             </ScrollView>
           </View>
           <Pressable
