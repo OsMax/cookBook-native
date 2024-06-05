@@ -10,6 +10,8 @@ const tokenSet = (token) => {
   axios.defaults.headers.common.authorization = token;
 };
 
+export const getComments = createAsyncThunk("comment/get", async (throw))
+
 export const addComment = createAsyncThunk(
   "comment/add",
   async (data, thunkAPI) => {
