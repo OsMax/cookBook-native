@@ -16,9 +16,11 @@ import { styles } from "./ReadRecipe.styles";
 import { logOut, editUser } from "../../redux/auth/authOperation";
 import * as ImagePicker from "expo-image-picker";
 import { useEffect, useState } from "react";
+import { Comments } from "../Comments/Comments";
 
 export const ReadRecipe = ({ recipe, setReadRecipe }) => {
   const [showComments, setShowComments] = useState(false);
+
   const cooking = recipe.cooking.split("\n");
   return (
     <View style={styles.containerModal}>
@@ -116,7 +118,7 @@ export const ReadRecipe = ({ recipe, setReadRecipe }) => {
                   borderRadius: 10,
                   alignItems: "center",
                 }}
-                // onPress={() => setReadRecipe(null)}
+                onPress={() => setShowComments(!showComments)}
               >
                 <Text
                   style={{
@@ -131,9 +133,11 @@ export const ReadRecipe = ({ recipe, setReadRecipe }) => {
                     // textDecorationLine: "underline",
                   }}
                 >
-                  Show comments →
+                  {!showComments && "Show comments ↓"}
+                  {showComments && "Close comments ↑"}
                 </Text>
               </Pressable>
+              {showComments && <Comments />}
             </ScrollView>
           </View>
           <Pressable
