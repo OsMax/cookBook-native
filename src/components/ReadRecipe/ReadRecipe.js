@@ -59,8 +59,8 @@ export const ReadRecipe = ({ recipe, setReadRecipe }) => {
             >
               <Image
                 style={{
-                  width: 240,
-                  height: 200,
+                  width: 420,
+                  height: 320,
                   borderRadius: 14,
                   marginTop: 12,
                 }}
