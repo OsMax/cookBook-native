@@ -137,7 +137,7 @@ export const ReadRecipe = ({ recipe, setReadRecipe }) => {
                   {showComments && "Close comments ↑"}
                 </Text>
               </Pressable>
-              {showComments && <Comments />}
+              {showComments && <Comments recipeId={recipe._id} />}
             </ScrollView>
           </View>
           <Pressable
