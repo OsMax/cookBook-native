@@ -2,13 +2,18 @@ import { View, Pressable, Text, TextInput } from "react-native";
 import { selectIsLogIn } from "../../redux/auth/authSelector";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { addComment } from "../../redux/comments/comOperation";
+import { useDispatch } from "react-redux";
 
-export const Comments = (recipeId) => {
+export const Comments = ({ recipeId }) => {
+  const dispatch = useDispatch();
   const isLogin = useSelector(selectIsLogIn);
   const [comment, setComment] = useState("");
 
   const submit = () => {
-    console.log(comment);
+    // console.log(recipeId);
+    const myComment = dispatch(addComment({ recipeId, comment })).arg;
+    // console.log(myComment);
   };
   return (
     <View style={{ width: "100%" }}>
