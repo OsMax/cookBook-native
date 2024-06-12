@@ -8,12 +8,12 @@ import { useDispatch } from "react-redux";
 export const Comments = ({ recipeId }) => {
   const dispatch = useDispatch();
   const isLogin = useSelector(selectIsLogIn);
-  const [comment, setComment] = useState("");
+  const [commentText, setCommentText] = useState("");
+  const [comments, setToComments] = useState([]);
 
-  const submit = () => {
-    // console.log(recipeId);
-    const myComment = dispatch(addComment({ recipeId, comment })).arg;
-    // console.log(myComment);
+  const submit = async () => {
+    const { payload } = await dispatch(addComment({ recipeId, commentText }));
+    setToComments([...comments, payload.comment]);
   };
   return (
     <View style={{ width: "100%" }}>
@@ -33,12 +33,12 @@ export const Comments = ({ recipeId }) => {
             }}
             placeholder="Your comment"
             placeholderTextColor="#BDBDBD"
-            onChangeText={setComment}
+            onChangeText={setCommentText}
             multiline
             numberOfLines={2}
           />
         )}
-        {comment && (
+        {commentText && (
           <Pressable
             style={{
               width: 44,
