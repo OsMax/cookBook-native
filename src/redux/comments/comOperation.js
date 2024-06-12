@@ -18,19 +18,18 @@ export const addComment = createAsyncThunk(
     // console.log(data);
     // return data;
     const state = thunkAPI.getState();
-    const { recipeId, comment } = data;
+    const { recipeId, commentText } = data;
     // if (!state.auth.token) return thunkAPI.rejectWithValue("Without token");
     tokenSet(`Bearer ${state.auth.token}`);
     // console.log(comment);
 
     // const comment = { text };
     // comment.date = new Date();
-    const myComment = { comment, date: new Date() };
+    const myComment = { commentText, date: new Date() };
 
     try {
-      const result = await axios.post(`/api/comments/${recipeId}`, myComment);
-      //   return result;
-      console.log(result);
+      const { data } = await axios.post(`/api/comments/${recipeId}`, myComment);
+      return data;
     } catch (error) {
       console.log(error);
     }
