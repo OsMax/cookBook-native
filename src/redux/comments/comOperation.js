@@ -10,21 +10,24 @@ const tokenSet = (token) => {
   axios.defaults.headers.common.authorization = token;
 };
 
-// export const getComments = createAsyncThunk("comment/get", async (throw))
+export const getComments = createAsyncThunk("comment/get", async (data) => {
+  const { recipeId } = data;
+  try {
+    const { data } = await axios.get(`/api/comments/${recipeId}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 export const addComment = createAsyncThunk(
   "comment/add",
   async (data, thunkAPI) => {
-    // console.log(data);
-    // return data;
     const state = thunkAPI.getState();
     const { recipeId, commentText } = data;
-    // if (!state.auth.token) return thunkAPI.rejectWithValue("Without token");
+    if (!state.auth.token) return thunkAPI.rejectWithValue("Without token");
     tokenSet(`Bearer ${state.auth.token}`);
-    // console.log(comment);
 
-    // const comment = { text };
-    // comment.date = new Date();
     const myComment = { commentText, date: new Date() };
 
     try {
@@ -33,7 +36,6 @@ export const addComment = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-    // console.log(data);
   }
 );
 
