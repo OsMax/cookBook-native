@@ -1,9 +1,10 @@
 import { View, Pressable, Text, TextInput } from "react-native";
 import { selectIsLogIn } from "../../redux/auth/authSelector";
 import { useSelector } from "react-redux";
-import { useState } from "react";
-import { addComment } from "../../redux/comments/comOperation";
+import { useEffect, useState } from "react";
+import { addComment, getComments } from "../../redux/comments/comOperation";
 import { useDispatch } from "react-redux";
+import { CommentsList } from "../CommentsList/CommentsList";
 
 export const Comments = ({ recipeId }) => {
   const dispatch = useDispatch();
@@ -11,15 +12,24 @@ export const Comments = ({ recipeId }) => {
   const [commentText, setCommentText] = useState("");
   const [comments, setToComments] = useState([]);
 
+  const getAll = async () => {
+    const { payload } = await dispatch(getComments({ recipeId }));
+
+    setToComments(payload.comments);
+  };
+
+  useEffect(() => {
+    getAll();
+  }, []);
+
   const submit = async () => {
     const { payload } = await dispatch(addComment({ recipeId, commentText }));
     setToComments([...comments, payload.comment]);
   };
   return (
     <View style={{ width: "100%" }}>
-      <View style={{ width: "100%" }}>
-        {/* <Text>All comments will be here</Text> */}
-        {isLogin && (
+      {isLogin && (
+        <View style={{ width: "100%" }}>
           <TextInput
             style={{
               marginTop: 12,
@@ -31,32 +41,33 @@ export const Comments = ({ recipeId }) => {
               paddingLeft: 8,
               paddingRight: 48,
             }}
-            placeholder="Your comment"
+            placeholder="Ваш комментарий"
             placeholderTextColor="#BDBDBD"
             onChangeText={setCommentText}
             multiline
             numberOfLines={2}
           />
-        )}
-        {commentText && (
-          <Pressable
-            style={{
-              width: 44,
-              height: 44,
-              backgroundColor: "green",
-              borderRadius: 10,
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            onPress={submit}
-          >
-            <Text style={{ fontSize: 22, color: "#fff" }}>✔</Text>
-          </Pressable>
-        )}
-      </View>
+          {commentText !== "" && (
+            <Pressable
+              style={{
+                width: 44,
+                height: 44,
+                backgroundColor: "green",
+                borderRadius: 10,
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              onPress={submit}
+            >
+              <Text style={{ fontSize: 22, color: "#fff" }}>✔</Text>
+            </Pressable>
+          )}
+        </View>
+      )}
+      {comments.length && <CommentsList comments={comments} />}
     </View>
   );
 };
