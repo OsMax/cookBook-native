@@ -10,6 +10,22 @@ const tokenSet = (token) => {
   axios.defaults.headers.common.authorization = token;
 };
 
+export const checkNewComments = createAsyncThunk(
+  "comment/check",
+  async (data) => {
+    const { recipeId, currentComments } = data;
+    try {
+      const { data } = await axios.post(
+        `/api/comments/check/${recipeId}`,
+        currentComments
+      );
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const getComments = createAsyncThunk("comment/get", async (data) => {
   const { recipeId } = data;
   try {
