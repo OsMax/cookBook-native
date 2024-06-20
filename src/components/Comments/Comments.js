@@ -1,8 +1,12 @@
 import { View, Pressable, Text, TextInput } from "react-native";
 import { selectIsLogIn } from "../../redux/auth/authSelector";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { addComment, getComments } from "../../redux/comments/comOperation";
+import React, { useEffect, useState } from "react";
+import {
+  addComment,
+  getComments,
+  checkNewComments,
+} from "../../redux/comments/comOperation";
 import { useDispatch } from "react-redux";
 import { CommentsList } from "../CommentsList/CommentsList";
 
@@ -11,6 +15,7 @@ export const Comments = ({ recipeId }) => {
   const isLogin = useSelector(selectIsLogIn);
   const [commentText, setCommentText] = useState("");
   const [comments, setToComments] = useState([]);
+  const intervalRef = React.useRef(null);
 
   const getAll = async () => {
     const { payload } = await dispatch(getComments({ recipeId }));
@@ -18,9 +23,26 @@ export const Comments = ({ recipeId }) => {
     setToComments(payload.comments);
   };
 
+  const checkComments = async () => {
+    const currentComments = comments.map((comment) => {
+      return { _id: comment._id, date: new Date(comment.date) };
+    });
+    const { payload } = await dispatch(
+      checkNewComments({ recipeId, currentComments })
+    );
+    console.log(payload);
+  };
+
   useEffect(() => {
     getAll();
   }, []);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(checkComments, 15000);
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, [comments]);
 
   const submit = async () => {
     const { payload } = await dispatch(addComment({ recipeId, commentText }));
