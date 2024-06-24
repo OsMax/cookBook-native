@@ -23,6 +23,20 @@ export const Comments = ({ recipeId }) => {
     setToComments(payload.comments);
   };
 
+  const updateComments = ({ forAdd, forDel }) => {
+    if (forDel.length) {
+      setToComments(
+        comments.filter(
+          (comment) =>
+            !forDel.some(
+              (commentDel) =>
+                commentDel._id.toString() === comment._id.toString()
+            )
+        )
+      );
+    }
+  };
+
   const checkComments = async () => {
     const currentComments = comments.map((comment) => {
       return { _id: comment._id, date: new Date(comment.date) };
@@ -30,7 +44,8 @@ export const Comments = ({ recipeId }) => {
     const { payload } = await dispatch(
       checkNewComments({ recipeId, currentComments })
     );
-    console.log(payload);
+    // console.log(payload);
+    updateComments(payload);
   };
 
   useEffect(() => {
@@ -38,7 +53,7 @@ export const Comments = ({ recipeId }) => {
   }, []);
 
   useEffect(() => {
-    intervalRef.current = setInterval(checkComments, 15000);
+    intervalRef.current = setInterval(checkComments, 5000);
     return () => {
       clearInterval(intervalRef.current);
     };
