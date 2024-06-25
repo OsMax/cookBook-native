@@ -55,13 +55,6 @@ export const Comments = ({ recipeId }) => {
   };
 
   useEffect(() => {
-    getAll();
-  }, []);
-
-  useEffect(() => {
-    intervalRef.current = setInterval(checkComments, 5000);
-    return () => {
-      clearInterval(intervalRef.current);
     const fetchData = async () => {
       await getAll();
       intervalRef.current = setInterval(checkComments, 15000);
@@ -72,7 +65,7 @@ export const Comments = ({ recipeId }) => {
 
   const submit = async () => {
     const { payload } = await dispatch(addComment({ recipeId, commentText }));
-    setToComments([...comments, payload.comment]);
+    setToComments((prevComments) => [...prevComments, payload.comment]);
   };
   return (
     <View style={{ width: "100%" }}>
@@ -115,7 +108,6 @@ export const Comments = ({ recipeId }) => {
           )}
         </View>
       )}
-      {comments.length && <CommentsList comments={comments} />}
       {comments.length !== 0 && <CommentsList comments={comments} />}
     </View>
   );
