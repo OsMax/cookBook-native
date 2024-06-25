@@ -62,8 +62,13 @@ export const Comments = ({ recipeId }) => {
     intervalRef.current = setInterval(checkComments, 5000);
     return () => {
       clearInterval(intervalRef.current);
+    const fetchData = async () => {
+      await getAll();
+      intervalRef.current = setInterval(checkComments, 15000);
     };
-  }, [comments]);
+    fetchData();
+    return () => clearInterval(intervalRef.current);
+  }, []);
 
   const submit = async () => {
     const { payload } = await dispatch(addComment({ recipeId, commentText }));
