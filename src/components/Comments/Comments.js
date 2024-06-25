@@ -111,6 +111,7 @@ export const Comments = ({ recipeId }) => {
         </View>
       )}
       {comments.length && <CommentsList comments={comments} />}
+      {comments.length !== 0 && <CommentsList comments={comments} />}
     </View>
   );
 };
