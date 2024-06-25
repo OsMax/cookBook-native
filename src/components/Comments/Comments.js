@@ -24,6 +24,13 @@ export const Comments = ({ recipeId }) => {
   };
 
   const updateComments = ({ forAdd, forDel }) => {
+    if (forAdd.length) {
+      const map = new Map();
+      comments.forEach((comment) => map.set(comment._id, comment));
+      forAdd.forEach((comment) => map.set(comment._id, comment));
+
+      setToComments(Array.from(map.values()));
+    }
     if (forDel.length) {
       setToComments(
         comments.filter(
@@ -35,13 +42,6 @@ export const Comments = ({ recipeId }) => {
         )
       );
     }
-    if (forAdd.length) {
-      const map = new Map();
-      comments.forEach((comment) => map.set(comment._id, comment));
-      forAdd.forEach((comment) => map.set(comment._id, comment));
-
-      setToComments(Array.from(map.values()));
-    }
   };
 
   const checkComments = async () => {
@@ -51,7 +51,6 @@ export const Comments = ({ recipeId }) => {
     const { payload } = await dispatch(
       checkNewComments({ recipeId, currentComments })
     );
-    // console.log(payload);
     updateComments(payload);
   };
 
