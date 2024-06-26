@@ -28,7 +28,7 @@ export const RecipesList = ({ page, setPage, count, editShow }) => {
         {/* <Text style={{ color: "#fff" }}>Recipes</Text> */}
         <FlatList
           style={{
-            width: "95%",
+            width: "98%",
             paddingBottom: 20,
             marginBottom: isLogIn ? 30 : 0,
           }}
@@ -41,20 +41,6 @@ export const RecipesList = ({ page, setPage, count, editShow }) => {
             if (!(recipes.length % count)) setPage(page + 1);
           }}
         />
-        {/* {showMore && (
-          <Pressable
-            onPress={() => {
-              setPage(page + 1);
-              console.log(page);
-            }}
-          >
-            <View>
-              <Text style={{ padding: 10, fontSize: 16, color: "#fff" }}>
-                Show more
-              </Text>
-            </View>
-          </Pressable>
-        )} */}
       </View>
       {readRecipe && (
         <ReadRecipe recipe={readRecipe} setReadRecipe={setReadRecipe} />
