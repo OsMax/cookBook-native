@@ -2,36 +2,43 @@ import { Text, View, Image, Dimensions, Pressable } from "react-native";
 
 export const recipesItem = ({ navigation, item, editShow, setReadRecipe }) => {
   const date = item.date.split("T")[0];
-  // console.log(editShow);
   const widthIteminfo = Dimensions.get("window").width * 0.95 - 158;
 
   return (
     <>
       <Pressable
         style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-start",
-          width: "100%",
-          borderWidth: 2,
+          // display: "flex",
+          // flexDirection: "row",
+          // alignItems: "flex-start",
+          alignItems: "center",
+          // width: "100%",
+          // borderWidth: 2,
+          // width: 320,
+          maxWidth: 440,
           borderRadius: 20,
-          borderColor: "#FF6C00",
+          // borderColor: "#FF6C00",
           marginTop: 10,
-          padding: 4,
-          backgroundColor: "#ffefef",
+          // padding: 4,
+          backgroundColor: "#fff",
+          overflow: "hidden",
         }}
         onPress={() => setReadRecipe(item)}
       >
         <Image
-          style={{ width: 150, height: 140, borderRadius: 14 }}
+          style={{ width: "100%", height: 240 }}
           source={{ uri: item.imageUrl }}
         />
         <View
           style={{
             // flexGrow: 1,
             width: widthIteminfo,
-            padding: 4,
+            padding: 6,
             height: "100%",
+            width: "100%",
+            top: -1,
+            backgroundColor: "#fffefe",
+
             // alignItems: "center",
             // flexDirection: "row",
           }}
@@ -39,10 +46,10 @@ export const recipesItem = ({ navigation, item, editShow, setReadRecipe }) => {
           <Text
             style={{
               color: "#FF6C00",
-              fontSize: 20,
-              textShadowColor: "#999", // Цвет тени
+              fontSize: 32,
+              marginTop: 10,
+              textShadowColor: "#999",
               textShadowOffset: { width: 1, height: 1 }, // Смещение тени
-              textShadowRadius: 2,
               textAlign: "center",
             }}
           >
@@ -50,48 +57,41 @@ export const recipesItem = ({ navigation, item, editShow, setReadRecipe }) => {
           </Text>
           <View
             style={{
-              width: "100%",
-              maxHeight: "100%",
-              flexGrow: 1,
-              justifyContent: "space-between",
+              // width: "100%",
+              padding: 8,
+              flexDirection: "row",
+              flexWrap: "wrap",
+              rowGap: 4,
+              columnGap: 6,
+              alignItems: "flex-start",
+              justifyContent: "center",
             }}
           >
-            <View
-              style={{
-                // width: "100%",
-                padding: 8,
-                flexDirection: "row",
-                flexWrap: "wrap",
-                rowGap: 4,
-                columnGap: 6,
-                alignItems: "flex-start",
-                justifyContent: "center",
-              }}
-            >
-              {item.ingredients.map((ing) => (
-                <Text
-                  key={item._id + ing}
-                  style={{
-                    backgroundColor: "#FF6C00",
-                    borderRadius: 8,
-                    paddingHorizontal: 8,
-                    paddingVertical: 2,
-                    color: "#fff",
-                  }}
-                >
-                  {ing}
-                </Text>
-              ))}
-            </View>
-            <View
-              style={{
-                width: "100%",
-                alignItems: "flex-end",
-                paddingRight: 4,
-              }}
-            >
-              <Text>{date}</Text>
-            </View>
+            {item.ingredients.map((ing) => (
+              <Text
+                key={item._id + ing}
+                style={{
+                  fontSize: 20,
+                  backgroundColor: "#FF6C22",
+                  borderRadius: 8,
+                  paddingHorizontal: 10,
+                  paddingVertical: 6,
+                  color: "#fff",
+                }}
+              >
+                {ing}
+              </Text>
+            ))}
+          </View>
+          <View
+            style={{
+              width: "100%",
+              paddingRight: 8,
+              // textAlign: "right",
+              alignItems: "flex-end",
+            }}
+          >
+            <Text>{date}</Text>
           </View>
         </View>
       </Pressable>
