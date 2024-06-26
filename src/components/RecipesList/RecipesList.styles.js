@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     // height: "100%",
     flexGrow: 1,
     // backgroundColor: "red",
+    alignItems: "center",
   },
   recipesList: {
     height: "100%",
