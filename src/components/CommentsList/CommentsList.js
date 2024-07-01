@@ -6,9 +6,26 @@ export const CommentsList = ({ comments }) => {
       {comments.map((comment) => (
         <View
           key={comment._id}
-          style={{ width: "100%", display: "flex", flexDirection: "row" }}
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            marginTop: 8,
+            borderRadius: 20,
+            borderWidth: 1,
+            padding: 8,
+            borderColor: "#ff9898",
+          }}
         >
-          <View>
+          <View
+            style={{
+              // padding: 8,
+              // backgroundColor: "green",
+              display: "flex",
+              alignItems: "center",
+              width: 70,
+            }}
+          >
             <Image
               style={{
                 width: 50,
@@ -17,11 +34,21 @@ export const CommentsList = ({ comments }) => {
               }}
               source={{ uri: comment.avatarURL }}
             />
-            <Text>{comment.ownerName}</Text>
+            <Text style={{ fontSize: 22 }}>{comment.ownerName}</Text>
           </View>
-          <View>
-            <Text>{comment.commentText}</Text>
-            <Text>
+          <View
+            style={{
+              flex: 1,
+              paddingHorizontal: 4,
+              justifyContent: "space-between",
+            }}
+          >
+            <Text style={{ width: "100%", fontSize: 18 }}>
+              {"  " + comment.commentText}
+            </Text>
+            <Text
+              style={{ color: "#aaaaaa", fontSize: 12, textAlign: "right" }}
+            >
               {comment.date.split("T")[0] +
                 " " +
                 comment.date.split("T")[1].split(":")[0] +
