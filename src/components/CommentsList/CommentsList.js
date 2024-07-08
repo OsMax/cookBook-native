@@ -13,6 +13,15 @@ export const CommentsList = ({ comments }) => {
             marginTop: 8,
             borderRadius: 20,
             borderWidth: 1,
+            borderLeftWidth: 2,
+            borderRightWidth: 2,
+            shadowColor: "#cc9898",
+            shadowOffset: {
+              width: 5,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
             padding: 8,
             borderColor: "#ff9898",
           }}
