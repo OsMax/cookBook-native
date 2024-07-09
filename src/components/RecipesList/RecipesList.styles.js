@@ -7,6 +7,9 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
     // backgroundColor: "red",
     alignItems: "center",
+    paddingTop: 4,
+    borderRadius: 24,
+    overflow: "hidden",
   },
   recipesList: {
     height: "100%",
