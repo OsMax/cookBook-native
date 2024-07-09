@@ -30,10 +30,17 @@
         "CAMERA",
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
-      ]
+      ],
+      "package": "com.yourcompany.yourappname"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4d3efae4-deb0-4020-a7c6-f6203efeda6a"
+      }
+    },
+    "owner": "osmax"
   }
 }
