@@ -34,7 +34,7 @@ export const recipesItem = ({ navigation, item, editShow, setReadRecipe }) => {
             // flexGrow: 1,
             width: widthIteminfo,
             padding: 6,
-            height: "100%",
+            // height: "100%",
             width: "100%",
             top: -1,
             backgroundColor: "#fffefe",
