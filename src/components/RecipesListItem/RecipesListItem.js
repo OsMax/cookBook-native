@@ -8,18 +8,10 @@ export const recipesItem = ({ navigation, item, editShow, setReadRecipe }) => {
     <>
       <Pressable
         style={{
-          // display: "flex",
-          // flexDirection: "row",
-          // alignItems: "flex-start",
           alignItems: "center",
-          // width: "100%",
-          // borderWidth: 2,
-          // width: 320,
           maxWidth: 440,
           borderRadius: 20,
-          // borderColor: "#FF6C00",
           marginTop: 10,
-          // padding: 4,
           backgroundColor: "#fff",
           overflow: "hidden",
         }}
@@ -31,16 +23,11 @@ export const recipesItem = ({ navigation, item, editShow, setReadRecipe }) => {
         />
         <View
           style={{
-            // flexGrow: 1,
             width: widthIteminfo,
             padding: 6,
-            // height: "100%",
             width: "100%",
             top: -1,
             backgroundColor: "#fffefe",
-
-            // alignItems: "center",
-            // flexDirection: "row",
           }}
         >
           <Text
@@ -57,7 +44,6 @@ export const recipesItem = ({ navigation, item, editShow, setReadRecipe }) => {
           </Text>
           <View
             style={{
-              // width: "100%",
               padding: 8,
               flexDirection: "row",
               flexWrap: "wrap",
@@ -87,7 +73,6 @@ export const recipesItem = ({ navigation, item, editShow, setReadRecipe }) => {
             style={{
               width: "100%",
               paddingRight: 8,
-              // textAlign: "right",
               alignItems: "flex-end",
             }}
           >
