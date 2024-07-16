@@ -7,10 +7,9 @@ export const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // прозрачный черный цвет (50% прозрачности)
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   loaderContainer: {
-    // backgroundColor: "white",
     padding: 20,
     borderRadius: 10,
     alignItems: "center",

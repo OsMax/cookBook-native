@@ -12,18 +12,15 @@ import { UserMenu } from "../UserMenu/UserMenu";
 export const Header = ({ navigation }) => {
   const user = useSelector(selectUser);
   const isLogin = useSelector(selectIsLogIn);
-  // const userName = useSelector(selectUserName);
 
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
-    // console.log(userName);
     if (!isLogin) {
       setShowMenu(false);
     }
   }, [isLogin]);
   return (
-    // <View style={[styles.container, { height: 20 }]}>
     <View style={[styles.container]}>
       {!isLogin && (
         <Pressable

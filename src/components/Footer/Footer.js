@@ -21,7 +21,6 @@ export const Footer = ({ count, setEditShow }) => {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.text}>FOOTER</Text> */}
       <View
         style={{
           position: "relative",
@@ -29,7 +28,6 @@ export const Footer = ({ count, setEditShow }) => {
           flex: 1,
           flexDirection: "row",
           justifyContent: "space-around",
-          // gap: 20,
         }}
       >
         <Pressable
@@ -66,8 +64,6 @@ export const Footer = ({ count, setEditShow }) => {
               color: "#FF6C00",
               fontSize: 50,
               textAlign: "center",
-              // marginTop: 0, // Убираем верхний отступ
-              // marginBottom: 0,
             }}
           >
             +

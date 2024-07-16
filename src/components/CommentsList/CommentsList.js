@@ -28,8 +28,6 @@ export const CommentsList = ({ comments }) => {
         >
           <View
             style={{
-              // padding: 8,
-              // backgroundColor: "green",
               display: "flex",
               alignItems: "center",
               width: 70,
