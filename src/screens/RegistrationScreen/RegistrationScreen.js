@@ -16,7 +16,6 @@ import {
 import { styles } from "./RegistrationScreen.styles";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-// import { launchImageLibrary } from "react-native-image-picker";
 import * as ImagePicker from "expo-image-picker";
 import { register } from "../../redux/auth/authOperation";
 import { selectLoader } from "../../redux/auth/authSelector";

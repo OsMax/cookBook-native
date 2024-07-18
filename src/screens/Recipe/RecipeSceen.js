@@ -58,7 +58,6 @@ export const RecipeScreen = ({ navigation }) => {
   };
 
   const submit = () => {
-    // console.log({ img: image, recipeInfo: { name, ingredients, cooking } });
     if (recipe) {
       const forEdit = { id: recipe._id, recipeInfo: {} };
       if (image !== recipe.imageUrl) forEdit.img = image;
@@ -261,7 +260,6 @@ export const RecipeScreen = ({ navigation }) => {
                         onSubmitEditing={addIngredient}
                       />
                       <TextInput
-                        // inputMode="email"
                         multiline
                         numberOfLines={6}
                         style={[styles.inputCook]}
@@ -305,7 +303,6 @@ export const RecipeScreen = ({ navigation }) => {
           </SafeAreaView>
         </TouchableWithoutFeedback>
       </ImageBackground>
-      {/* {isLoade && <Loader />} */}
     </>
   );
 };

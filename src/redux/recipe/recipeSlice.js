@@ -33,6 +33,7 @@ const recipeSlise = createSlice({
         state.loader = false;
       })
       .addCase(getPublic.rejected, (state) => {
+        console.log(state);
         state.loader = true;
       })
       .addCase(getPublic.fulfilled, (state, { payload }) => {
