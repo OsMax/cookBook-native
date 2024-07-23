@@ -32,8 +32,7 @@ const recipeSlise = createSlice({
       .addCase(editRecipe.rejected, (state) => {
         state.loader = false;
       })
-      .addCase(getPublic.rejected, (state) => {
-        console.log(state);
+      .addCase(getPublic.pending, (state) => {
         state.loader = true;
       })
       .addCase(getPublic.fulfilled, (state, { payload }) => {
@@ -44,7 +43,10 @@ const recipeSlise = createSlice({
 
         state.loader = false;
       })
-      .addCase(getMy.rejected, (state) => {
+      .addCase(getPublic.rejected, (state) => {
+        state.loader = false;
+      })
+      .addCase(getMy.pending, (state) => {
         state.loader = true;
       })
       .addCase(getMy.fulfilled, (state, { payload }) => {
@@ -53,6 +55,9 @@ const recipeSlise = createSlice({
         if (page === 1) state.recipes = [...data];
         else state.recipes = [...state.recipes, ...data];
 
+        state.loader = false;
+      })
+      .addCase(getMy.rejected, (state) => {
         state.loader = false;
       });
   },
