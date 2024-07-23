@@ -4,18 +4,10 @@ import {
   Text,
   Image,
   Modal,
-  // KeyboardAvoidingView,
-  // Keyboard,
-  // Platform,
-  TouchableWithoutFeedback,
-  TextInput,
   ScrollView,
 } from "react-native";
-import { useDispatch } from "react-redux";
 import { styles } from "./ReadRecipe.styles";
-import { logOut, editUser } from "../../redux/auth/authOperation";
-import * as ImagePicker from "expo-image-picker";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Comments } from "../Comments/Comments";
 
 export const ReadRecipe = ({ recipe, setReadRecipe }) => {

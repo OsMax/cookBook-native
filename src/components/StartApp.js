@@ -14,10 +14,6 @@ export const StartApp = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(current());
-    // const user = useSelector(selectUser);
-    // if (!user.name) {
-    //   navigation.navigate("Recipes");
-    // }
   }, []);
   return (
     <NavigationContainer>

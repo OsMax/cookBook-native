@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image } from "react-native";
+import { View, Text, Image } from "react-native";
 
 export const CommentsList = ({ comments }) => {
   return (

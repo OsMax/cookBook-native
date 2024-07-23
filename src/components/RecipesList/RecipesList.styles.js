@@ -3,9 +3,7 @@ const windowHeight = Dimensions.get("window").height;
 
 export const styles = StyleSheet.create({
   container: {
-    // height: "100%",
     flexGrow: 1,
-    // backgroundColor: "red",
     alignItems: "center",
     paddingTop: 4,
     borderRadius: 24,

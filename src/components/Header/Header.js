@@ -1,9 +1,5 @@
 import { View, Pressable, Text, Image } from "react-native";
-import {
-  selectUser,
-  selectIsLogIn,
-  selectUserName,
-} from "../../redux/auth/authSelector";
+import { selectUser, selectIsLogIn } from "../../redux/auth/authSelector";
 import { useSelector } from "react-redux";
 import { styles } from "./Header.styles";
 import { useEffect, useState } from "react";

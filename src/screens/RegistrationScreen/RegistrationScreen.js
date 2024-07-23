@@ -20,7 +20,6 @@ import * as ImagePicker from "expo-image-picker";
 import { register } from "../../redux/auth/authOperation";
 import { selectLoader } from "../../redux/auth/authSelector";
 import { Loader } from "../../components/Loader/Loader";
-// import * as FileSystem from "expo-file-system";
 
 export const RegistrationScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -47,7 +46,6 @@ export const RegistrationScreen = ({ navigation }) => {
   };
 
   const submit = () => {
-    // console.log(avatar, name, email, password);
     dispatch(register({ avatar: avatar, info: { name, email, password } }));
   };
 

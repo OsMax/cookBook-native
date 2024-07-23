@@ -25,7 +25,6 @@ export const RecipesList = ({ page, setPage, count, editShow }) => {
   return (
     <View style={styles.container}>
       <View style={styles.recipesList}>
-        {/* <Text style={{ color: "#fff" }}>Recipes</Text> */}
         <FlatList
           style={{
             width: "98%",

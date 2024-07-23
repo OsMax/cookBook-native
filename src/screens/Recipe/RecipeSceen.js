@@ -204,7 +204,6 @@ export const RecipeScreen = ({ navigation }) => {
                           style={{
                             width: "100%",
                             display: "flex",
-                            // flexWrap: "wrap",
                             flexDirection: "row",
                             gap: 4,
                           }}
@@ -238,7 +237,6 @@ export const RecipeScreen = ({ navigation }) => {
                                     borderRadius: 12,
                                     alignItems: "center",
                                     justifyContent: "center",
-                                    // position: "absolute",
                                   }}
                                   onPress={() => delIng(ing)}
                                 >

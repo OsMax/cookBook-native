@@ -4,7 +4,6 @@ const windowHeight = Dimensions.get("window").height;
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
     width: "100%",
     marginTop: 50,
     alignItems: "center",
@@ -15,7 +14,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     borderRadius: 5,
     fontSize: 24,
-    fontFamily: "Roboto-Black", // color: "black",
+    fontFamily: "Roboto-Black",
     borderWidth: 1,
     marginTop: 20,
     borderColor: "#fff",

@@ -29,15 +29,11 @@ export const Home = ({ navigation }) => {
   const isLogin = useSelector(selectIsLogIn);
   const isLoade = useSelector(selectLoader);
 
-  // const [recipes, setRecipes] = useState(null);
-
   useEffect(() => {
-    // console.log(user);
     if (isLogin) {
       Toast.show({
         type: "success",
         text1: "You are login",
-        // text2: "You are login",
         visibilityTime: 1000,
       });
     }
@@ -73,8 +69,6 @@ export const Home = ({ navigation }) => {
               setEditShow={setEditShow}
             />
           )}
-
-          {/* <StatusBar style="auto" /> */}
         </View>
       </ImageBackground>
       {isLoade && <Loader />}
