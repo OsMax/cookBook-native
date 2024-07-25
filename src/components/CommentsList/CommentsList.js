@@ -1,4 +1,3 @@
-import { View, Text, Image } from "react-native";
 import { View, Text, Image, Pressable } from "react-native";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelector";
@@ -30,6 +29,20 @@ export const CommentsList = ({ comments }) => {
             borderColor: "#ff9898",
           }}
         >
+          {comment.owner === user._id && (
+            <Pressable
+              style={{ position: "absolute", top: 20, right: 10 }}
+              onPress={() => console.log("edit press")}
+            >
+              <Image
+                style={{
+                  width: 20,
+                  height: 20,
+                }}
+                source={require("../../../assets/images/edit.png")}
+              />
+            </Pressable>
+          )}
           <View
             style={{
               display: "flex",
