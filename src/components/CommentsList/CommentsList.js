@@ -1,6 +1,10 @@
 import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/authSelector";
 
 export const CommentsList = ({ comments }) => {
+  const user = useSelector(selectUser);
   return (
     <View style={{ width: "100%" }}>
       {comments.map((comment) => (
