@@ -4,6 +4,10 @@ import { selectUser } from "../../redux/auth/authSelector";
 
 export const CommentsList = ({ comments }) => {
   const user = useSelector(selectUser);
+
+  const edit = () => {
+    console.log("Edit");
+  };
   return (
     <View style={{ width: "100%" }}>
       {comments.map((comment) => (
@@ -32,7 +36,7 @@ export const CommentsList = ({ comments }) => {
           {comment.owner === user._id && (
             <Pressable
               style={{ position: "absolute", top: 20, right: 10 }}
-              onPress={() => console.log("edit press")}
+              onPress={edit}
             >
               <Image
                 style={{
