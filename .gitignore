@@ -35,4 +35,5 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
+# Ігнорування файлу temp.json
 temp.json
