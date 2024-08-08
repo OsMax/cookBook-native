@@ -2,12 +2,14 @@ import { View, Text, Image, Pressable } from "react-native";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelector";
 
-export const CommentsList = ({ comments }) => {
+export const CommentsList = ({ comments, editComment, setCommentId }) => {
   const user = useSelector(selectUser);
 
-  const edit = () => {
-    console.log("Edit");
+  const edit = (text, id) => {
+    editComment(text);
+    setCommentId(id);
   };
+
   return (
     <View style={{ width: "100%" }}>
       {comments.map((comment) => (
@@ -36,7 +38,7 @@ export const CommentsList = ({ comments }) => {
           {comment.owner === user._id && (
             <Pressable
               style={{ position: "absolute", top: 20, right: 10 }}
-              onPress={edit}
+              onPress={() => edit(comment.commentText, comment._id)}
             >
               <Image
                 style={{
