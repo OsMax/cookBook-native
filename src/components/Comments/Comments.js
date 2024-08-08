@@ -15,6 +15,7 @@ export const Comments = ({ recipeId }) => {
   const isLogin = useSelector(selectIsLogIn);
   const [commentText, setCommentText] = useState("");
   const [comments, setToComments] = useState([]);
+  const [commentId, setCommentId] = useState("");
   const intervalRef = React.useRef(null);
 
   const getAll = async () => {
@@ -108,7 +109,13 @@ export const Comments = ({ recipeId }) => {
           )}
         </View>
       )}
-      {comments.length !== 0 && <CommentsList comments={comments} />}
+      {comments.length !== 0 && (
+        <CommentsList
+          comments={comments}
+          editComment={setCommentText}
+          setCommentId={setCommentId}
+        />
+      )}
     </View>
   );
 };
